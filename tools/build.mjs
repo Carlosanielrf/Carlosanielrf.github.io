@@ -9,7 +9,7 @@
 import { pipeline } from '@huggingface/transformers';
 import { readFile, writeFile } from 'node:fs/promises';
 
-const MODEL = 'onnx-community/all-MiniLM-L6-v2-ONNX'; // must match index.html
+const MODEL = 'Xenova/all-MiniLM-L6-v2'; // must match index.html
 const SRC = new URL('./knowledge.src.json', import.meta.url);
 const OUT = new URL('../knowledge.json', import.meta.url);
 

@@ -22,7 +22,7 @@
     },
     {
       "id": "about",
-      "questions": ["Who are you?", "Tell me about yourself", "Introduce yourself", "Who is Carlos?", "Give me a summary"],
+      "questions": ["Who are you?", "Tell me about yourself", "Introduce yourself", "Who is Carlos?", "Give me a summary", "Tell me about your experience", "What is your background?"],
       "answer": "I'm an iOS developer with 7 years shipping to the App Store. I've worked on a B2B marketplace launched in 20 countries, a Portuguese C2C marketplace, and, for the last five years at Bosch, the apps that control home heating from your phone. On my own time I built Periplum, my own iOS app, solo from first commit to store listing."
     },
     {
@@ -128,7 +128,7 @@
     },
     {
       "id": "swift-swiftui",
-      "questions": ["Do you use SwiftUI?", "SwiftUI or UIKit?", "What's your iOS stack?", "Which frameworks do you know?", "Do you know UIKit?"],
+      "questions": ["Do you use SwiftUI?", "SwiftUI or UIKit?", "What's your iOS stack?", "What is your tech stack?", "What are your skills?", "What are your technical skills?", "Which frameworks do you know?", "Do you know UIKit?"],
       "answer": "Swift and SwiftUI daily, with solid UIKit experience too. I've also worked with RxSwift, SwiftData, WidgetKit, App Intents, MapKit, PDFKit, StoreKit 2, Core ML and Swift Concurrency, on iPhone and iPad."
     },
     {
@@ -223,7 +223,7 @@
     },
     {
       "id": "hobbies",
-      "questions": ["What do you do in your free time?", "Hobbies", "What do you like outside work?", "Tell me something personal", "Do you have pets?", "Do you have a dog?", "Do you do sports?"],
+      "questions": ["What do you do in your free time?", "Hobbies", "What are your hobbies?", "Tell me your hobbies", "Tell me about your hobbies", "What do you do for fun?", "What are your interests outside of work?", "What do you do on weekends?", "What do you like outside work?", "Tell me something personal", "Do you have pets?", "Do you have a dog?", "Do you do sports?"],
       "answer": "Gym, running, eating out, the beach, and hiking trails with my dog."
     }
   ]

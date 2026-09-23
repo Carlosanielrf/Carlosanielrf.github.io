@@ -204,7 +204,7 @@
 <script type="module">
   // Loaded lazily so the page (chips, links, fallback matching) still works if the CDN is unreachable
   const LIB = 'https://cdn.jsdelivr.net/npm/@huggingface/transformers@4.3.0';
-  const MODEL = 'onnx-community/all-MiniLM-L6-v2-ONNX'; // must match tools/build.mjs
+  const MODEL = 'Xenova/all-MiniLM-L6-v2'; // must match tools/build.mjs
   const $ = id => document.getElementById(id);
   const log = $('log'), chips = $('chips'), form = $('form'), input = $('q'), send = $('send'), status = $('status');
   const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
