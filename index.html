@@ -264,20 +264,30 @@
       for (let i = 0; i < vec.length; i++) s += vec[i] * qv[i];
       if (s > (best.get(topic) ?? -1)) best.set(topic, s);
     }
+    for (const [t, s] of best) if (keywordHit(q, t)) best.set(t, s + KEYWORD_BONUS);
     let top = null, score = -1;
     for (const [t, s] of best) if (s > score) { top = t; score = s; }
     return { topic: top, score };
   }
+
+  // A topic's keywords (singular or plural) in the question boost it, so "skills?" or
+  // "your hobbies" land on their topic, while a clearly better match elsewhere still wins.
+  const KEYWORD_BONUS = 0.15;
+  const keywordHit = (q, t) => t.keywords?.some(k => new RegExp(`\\b${k}s?\\b`, 'i').test(q));
 
   // Fallback when the model can't run: word overlap
   const words = s => new Set(s.toLowerCase().match(/[a-z0-9+#]+/g) || []);
   function lexicalMatch(q, kb) {
     const qw = words(q);
     let top = null, score = 0;
-    for (const t of kb.topics) for (const ex of t.questions) {
-      const ew = words(ex);
-      const inter = [...qw].filter(w => ew.has(w)).length;
-      const s = inter / (qw.size + ew.size - inter || 1);
+    for (const t of kb.topics) {
+      let s = 0;
+      for (const ex of t.questions) {
+        const ew = words(ex);
+        const inter = [...qw].filter(w => ew.has(w)).length;
+        s = Math.max(s, inter / (qw.size + ew.size - inter || 1));
+      }
+      if (keywordHit(q, t)) s += 0.5;
       if (s > score) { top = t; score = s; }
     }
     return { topic: top, score: score >= 0.34 ? 1 : 0 };

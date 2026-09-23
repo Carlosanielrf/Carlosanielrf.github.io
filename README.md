@@ -29,6 +29,8 @@ tools/build.mjs          precomputes embeddings → knowledge.json
 
 Every question logs the matched topic and score in the browser console (`match location 0.712`). Wrong answers → raise `meta.threshold` or add phrasings. Too many "I don't know" → lower it or add phrasings.
 
+A topic's optional `keywords` (e.g. `"skill"`, `"hobby"`, singular or plural) add +0.15 to its score when they appear in the question, so a bare "skills" or "hobbies" goes straight there, while a clearly better match elsewhere ("frontend skills" → web-dev) still wins.
+
 ## Running locally
 
 ```
