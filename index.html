@@ -1,0 +1,358 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Carlos Fonseca, iOS developer</title>
+<meta name="description" content="Ask Carlos Fonseca, iOS developer in Coimbra, anything about his work, apps and skills.">
+<meta property="og:title" content="Carlos Fonseca, iOS developer">
+<meta property="og:description" content="A CV you can talk to. Ask about my work, apps and skills.">
+<meta property="og:image" content="https://carlosanielrf.github.io/photo.jpg">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#151312" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💬</text></svg>">
+<style>
+  :root {
+    --bg: #ffffff;
+    --ink: #1b1918;
+    --muted: #86827e;
+    --them: #eceae7;
+    --blue: #0a7cff;
+    --hair: rgba(27, 25, 24, .12);
+    --bar: rgba(255, 255, 255, .78);
+    --font: -apple-system, BlinkMacSystemFont, "SF Pro Text", system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    color-scheme: light dark;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #151312;
+      --ink: #f3f1ee;
+      --muted: #9a948e;
+      --them: #2b2826;
+      --blue: #0a84ff;
+      --hair: rgba(255, 255, 255, .12);
+      --bar: rgba(21, 19, 18, .78);
+    }
+  }
+
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    min-height: 100dvh;
+    background: var(--bg);
+    color: var(--ink);
+    font: 17px/1.35 var(--font);
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: var(--blue); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  :focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; border-radius: 6px; }
+  .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+  /* Compact bar, shown once the contact header scrolls away */
+  .bar {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 10;
+    padding: calc(env(safe-area-inset-top, 0px) + .5rem) 1rem .5rem;
+    display: flex; align-items: center; justify-content: center; gap: .55rem;
+    background: var(--bar);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    backdrop-filter: saturate(180%) blur(20px);
+    border-bottom: 1px solid var(--hair);
+    font-size: 15px; font-weight: 600;
+    transform: translateY(-100%); transition: transform .25s ease;
+  }
+  .bar.show { transform: none; }
+  .bar img { width: 28px; height: 28px; border-radius: 50%; }
+
+  .thread {
+    max-width: 44rem; margin: 0 auto;
+    padding: calc(env(safe-area-inset-top, 0px) + 2.5rem) 1rem calc(env(safe-area-inset-bottom, 0px) + 7.5rem);
+  }
+
+  /* Contact header, like the top of a Messages thread */
+  .contact { text-align: center; }
+  .avatar {
+    width: 112px; height: 112px; border-radius: 50%; object-fit: cover; display: block; margin: 0 auto;
+    background: var(--them);
+  }
+  .contact h1 { margin: .75rem 0 .15rem; font-size: 28px; font-weight: 600; letter-spacing: -.01em; line-height: 1.15; }
+  .contact .role { margin: 0; color: var(--muted); font-size: 15px; }
+  .links { display: flex; justify-content: center; flex-wrap: wrap; gap: .35rem 1.1rem; margin-top: .9rem; font-size: 15px; }
+
+  .stamp { margin: 2.25rem 0 .75rem; text-align: center; color: var(--muted); font-size: 12px; }
+  .stamp b { font-weight: 600; }
+
+  /* Messages */
+  .log { display: flex; flex-direction: column; gap: 2px; }
+  .msg {
+    position: relative; max-width: min(80%, 32rem);
+    padding: .45rem .8rem; border-radius: 1.15rem;
+    overflow-wrap: anywhere; white-space: pre-line;
+  }
+  .msg.first { margin-top: .6rem; }
+  .log > .msg:first-child { margin-top: 0; }
+  .them { align-self: flex-start; background: var(--them); color: var(--ink); }
+  .me { align-self: flex-end; background: var(--blue); color: #fff; }
+  .me a { color: #fff; text-decoration: underline; }
+  .applinks { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .55rem; white-space: normal; }
+  .applinks a { font-size: 15px; padding: .2rem .65rem; border-radius: 999px; background: var(--bg); }
+
+  /* Bubble tails on the last message of each group */
+  .tail::before, .tail::after { content: ""; position: absolute; bottom: 0; height: 1.1rem; }
+  .tail.me::before { right: -.4rem; width: 1.1rem; background: var(--blue); border-bottom-left-radius: .95rem .8rem; }
+  .tail.me::after { right: -.65rem; width: .65rem; background: var(--bg); border-bottom-left-radius: .6rem; }
+  .tail.them::before { left: -.4rem; width: 1.1rem; background: var(--them); border-bottom-right-radius: .95rem .8rem; }
+  .tail.them::after { left: -.65rem; width: .65rem; background: var(--bg); border-bottom-right-radius: .6rem; }
+
+  .typing { display: inline-flex; gap: 4px; padding: .1rem 0; }
+  .typing i { width: 7px; height: 7px; border-radius: 50%; background: var(--muted); opacity: .45; animation: blink 1.2s infinite; }
+  .typing i:nth-child(2) { animation-delay: .2s; }
+  .typing i:nth-child(3) { animation-delay: .4s; }
+  @keyframes blink { 30% { opacity: 1; } }
+
+  /* Suggested questions, right-aligned like quick replies */
+  .chips { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: .45rem; margin-top: 1rem; }
+  .chips button {
+    font: inherit; font-size: 15px; color: var(--blue);
+    background: transparent; border: 1px solid var(--blue); border-radius: 999px;
+    padding: .35rem .8rem; cursor: pointer;
+  }
+  .chips button:hover { background: color-mix(in srgb, var(--blue) 10%, transparent); }
+
+  /* Composer */
+  .composer {
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 10;
+    padding: .6rem 1rem calc(env(safe-area-inset-bottom, 0px) + .5rem);
+    background: var(--bar);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    backdrop-filter: saturate(180%) blur(20px);
+    border-top: 1px solid var(--hair);
+  }
+  .composer form { max-width: 44rem; margin: 0 auto; position: relative; }
+  .composer input {
+    width: 100%; font: inherit; font-size: 17px; color: var(--ink);
+    background: var(--bg); border: 1px solid var(--hair); border-radius: 999px;
+    padding: .5rem 2.9rem .5rem 1rem; outline: none;
+  }
+  .composer input:focus { border-color: var(--muted); }
+  .composer input::placeholder { color: var(--muted); }
+  .send {
+    position: absolute; right: 4px; top: 50%; transform: translateY(-50%);
+    width: 30px; height: 30px; border-radius: 50%; border: 0; padding: 0;
+    background: var(--blue); color: #fff; display: grid; place-items: center; cursor: pointer;
+  }
+  .send:disabled { background: var(--muted); opacity: .45; cursor: default; }
+  .status { max-width: 44rem; margin: .35rem auto 0; text-align: center; font-size: 12px; color: var(--muted); min-height: 1em; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .bar { transition: none; }
+    .typing i { animation: none; opacity: .8; }
+  }
+</style>
+</head>
+<body>
+
+<div class="bar" id="bar" aria-hidden="true">
+  <img src="photo.jpg" alt="">
+  <span>Carlos Fonseca</span>
+</div>
+
+<main class="thread">
+  <header class="contact" id="contact">
+    <img class="avatar" src="photo.jpg" alt="Carlos Fonseca" width="112" height="112">
+    <h1>Carlos Fonseca</h1>
+    <p class="role">iOS developer in Coimbra, Portugal</p>
+    <nav class="links" aria-label="Links">
+      <a href="https://www.linkedin.com/in/carlosaniel/" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://github.com/Carlosanielrf" target="_blank" rel="noopener">GitHub</a>
+      <a href="cv.pdf" target="_blank">CV (PDF)</a>
+      <a href="mailto:carlosanielrf@gmail.com">Email</a>
+    </nav>
+  </header>
+
+  <p class="stamp"><b>Today</b> <span id="time"></span></p>
+
+  <div class="log" id="log" role="log" aria-live="polite">
+    <div class="msg them first">Hi, I'm Carlos 👋</div>
+    <div class="msg them">This page is a conversation instead of a CV. Ask me about my work, my apps, my stack, or how to reach me.</div>
+    <div class="msg them tail">The answers are written by me. A small model running in your browser matches your question to the right one, so what you type never leaves this page.</div>
+  </div>
+
+  <div class="chips" id="chips">
+    <button type="button" data-topic="about">What do you do?</button>
+    <button type="button" data-topic="bosch-apps">Which apps do you work on?</button>
+    <button type="button" data-topic="periplum">Tell me about Periplum</button>
+    <button type="button" data-topic="availability">Are you open to work?</button>
+    <button type="button" data-topic="contact">How can I reach you?</button>
+  </div>
+
+  <noscript><p>This chat needs JavaScript. You can still <a href="cv.pdf">download my CV</a> or <a href="mailto:carlosanielrf@gmail.com">email me</a>.</p></noscript>
+</main>
+
+<div class="composer">
+  <form id="form" autocomplete="off">
+    <label class="sr-only" for="q">Ask a question</label>
+    <input id="q" name="q" type="text" placeholder="Ask me something" maxlength="200" enterkeyhint="send">
+    <button class="send" id="send" type="submit" aria-label="Send" disabled>
+      <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 13V3M3.5 7.5 8 3l4.5 4.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+  </form>
+  <p class="status" id="status">Loading the model…</p>
+</div>
+
+<script type="module">
+  // Loaded lazily so the page (chips, links, fallback matching) still works if the CDN is unreachable
+  const LIB = 'https://cdn.jsdelivr.net/npm/@huggingface/transformers@4.3.0';
+  const MODEL = 'onnx-community/all-MiniLM-L6-v2-ONNX'; // must match tools/build.mjs
+  const $ = id => document.getElementById(id);
+  const log = $('log'), chips = $('chips'), form = $('form'), input = $('q'), send = $('send'), status = $('status');
+  const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  $('time').textContent = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+  // Compact bar once the contact header is out of view
+  new IntersectionObserver(([e]) => $('bar').classList.toggle('show', !e.isIntersecting))
+    .observe($('contact'));
+
+  // ---------- Knowledge base + model ----------
+  const kbReady = fetch('knowledge.json').then(r => r.json())
+    .then(kb => { kb.topics = kb.topics.filter(t => t.answer && t.answer !== 'TODO'); return kb; });
+
+  const files = {};
+  const mb = b => (b / 1048576).toFixed(0);
+  function onProgress(e) {
+    if (e.status !== 'progress' || !e.total) return;
+    files[e.file] = [e.loaded, e.total];
+    const v = Object.values(files);
+    const loaded = v.reduce((s, x) => s + x[0], 0), total = v.reduce((s, x) => s + x[1], 0);
+    if (total > 1048576) status.textContent = `Loading the model, ${mb(loaded)} of ${mb(total)} MB`;
+  }
+
+  let index = null;      // [{ topic, vec }]
+  let extractor = null;
+  const embed = async texts => (await extractor(texts, { pooling: 'mean', normalize: true })).tolist();
+
+  const modelReady = (async () => {
+    const kb = await kbReady;
+    const { pipeline } = await import(LIB);
+    extractor = await pipeline('feature-extraction', MODEL, { dtype: 'q8', progress_callback: onProgress });
+    index = [];
+    for (const t of kb.topics) {
+      // Uses precomputed vectors from tools/build.mjs when present, otherwise embeds here.
+      const vecs = t.embeddings?.length === t.questions.length ? t.embeddings : await embed(t.questions);
+      vecs.forEach(v => index.push({ topic: t, vec: Float32Array.from(v) }));
+    }
+    status.textContent = 'Ready. Everything runs in your browser.';
+  })().catch(err => {
+    console.error('Model failed to load:', err);
+    extractor = null;
+    status.textContent = location.protocol === 'file:'
+      ? 'Opened as a local file, so the model can’t load. Serve the folder instead (see console).'
+      : `Model didn’t load (${err?.message?.slice(0, 80) || err}). Using simple word matching.`;
+  });
+
+  if (location.protocol === 'file:') {
+    console.warn('Run this in the site folder, then open http://localhost:8000\n  python3 -m http.server 8000');
+  }
+
+  // ---------- Matching ----------
+  async function semanticMatch(q) {
+    const [qv] = await embed([q]);
+    const best = new Map();
+    for (const { topic, vec } of index) {
+      let s = 0;
+      for (let i = 0; i < vec.length; i++) s += vec[i] * qv[i];
+      if (s > (best.get(topic) ?? -1)) best.set(topic, s);
+    }
+    let top = null, score = -1;
+    for (const [t, s] of best) if (s > score) { top = t; score = s; }
+    return { topic: top, score };
+  }
+
+  // Fallback when the model can't run: word overlap
+  const words = s => new Set(s.toLowerCase().match(/[a-z0-9+#]+/g) || []);
+  function lexicalMatch(q, kb) {
+    const qw = words(q);
+    let top = null, score = 0;
+    for (const t of kb.topics) for (const ex of t.questions) {
+      const ew = words(ex);
+      const inter = [...qw].filter(w => ew.has(w)).length;
+      const s = inter / (qw.size + ew.size - inter || 1);
+      if (s > score) { top = t; score = s; }
+    }
+    return { topic: top, score: score >= 0.34 ? 1 : 0 };
+  }
+
+  async function answerFor(q) {
+    const kb = await kbReady;
+    await modelReady;
+    const m = extractor && index ? await semanticMatch(q) : lexicalMatch(q, kb);
+    console.debug('match', m.topic?.id, m.score.toFixed?.(3));
+    return m.topic && m.score >= (kb.meta.threshold ?? 0.55) ? m.topic : { answer: kb.meta.fallback };
+  }
+
+  // ---------- UI ----------
+  const esc = s => s.replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  const linkify = s => esc(s)
+    .replace(/\b[\w.+-]+@[\w-]+\.[\w.]+\b/g, m => `<a href="mailto:${m}">${m}</a>`)
+    .replace(/\b((?:linkedin|github)\.com\/[\w\-/]+)/g, m => `<a href="https://${m}" target="_blank" rel="noopener">${m}</a>`)
+    .replace(/\bCV\b(?= is| linked|\.)/g, '<a href="cv.pdf" target="_blank">CV</a>');
+
+  const appLinks = links => links?.length
+    ? `<span class="applinks">${links.map(l => `<a href="${esc(l.url)}" target="_blank" rel="noopener">${esc(l.label)}</a>`).join('')}</span>`
+    : '';
+
+  function bubble(who, html) {
+    const last = log.lastElementChild;
+    const el = document.createElement('div');
+    el.className = `msg ${who} tail`;
+    if (last?.classList.contains(who)) last.classList.remove('tail');
+    else el.classList.add('first');
+    el.innerHTML = html;
+    log.appendChild(el);
+    scrollDown();
+    return el;
+  }
+
+  function scrollDown() {
+    const el = document.scrollingElement;
+    el.scrollTo({ top: el.scrollHeight, behavior: reduceMotion ? 'auto' : 'smooth' });
+  }
+
+  const wait = ms => new Promise(r => setTimeout(r, ms));
+  let busy = Promise.resolve();
+
+  function ask(text, topicId) {
+    busy = busy.then(async () => {
+      bubble('me', esc(text));
+      const typing = bubble('them', '<span class="typing" aria-label="Typing"><i></i><i></i><i></i></span>');
+      const kb = await kbReady.catch(() => null);
+      if (!kb) { typing.textContent = 'This page couldn’t load its answers. Email me at carlosanielrf@gmail.com.'; return; }
+      const direct = topicId && kb.topics.find(t => t.id === topicId);
+      const [topic] = await Promise.all([direct || answerFor(text), wait(500 + Math.random() * 400)]);
+      typing.innerHTML = linkify(topic.answer) + appLinks(topic.links);
+      scrollDown();
+    });
+  }
+
+  chips.addEventListener('click', e => {
+    const b = e.target.closest('button');
+    if (!b) return;
+    ask(b.textContent, b.dataset.topic);
+    b.remove();
+    if (!chips.children.length) chips.hidden = true;
+  });
+
+  input.addEventListener('input', () => { send.disabled = !input.value.trim(); });
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    const q = input.value.trim();
+    if (!q) return;
+    input.value = '';
+    send.disabled = true;
+    ask(q);
+  });
+</script>
+</body>
+</html>
