@@ -106,7 +106,7 @@
       "id": "periplum",
       "keywords": ["periplum", "side project"],
       "questions": ["What is Periplum?", "Do you have side projects?", "Tell me about your own app", "Have you built an app alone?", "Personal projects"],
-      "answer": "Periplum is my own iOS app, and it's live on the App Store in Portugal, Spain, France and Italy. I did it all myself: design, architecture, code, release, even the store listing.",
+      "answer": "Periplum is my own iOS app, and it's live on the App Store in Portugal, Spain, France, Italy, the US and the UK. I did it all myself: design, architecture, code, release, even the store listing.",
       "links": [
         { "label": "Periplum", "url": "https://apps.apple.com/pt/app/periplum/id6801804074" }
       ]
