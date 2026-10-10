@@ -139,7 +139,14 @@
       "id": "skills",
       "keywords": ["skill", "tech stack", "technology", "technologies"],
       "questions": ["What skills do you have?", "Tell me your skills", "What are your skills?", "Skills", "What are your technical skills?", "What is your tech stack?", "What's your iOS stack?", "What technologies do you know?", "What is your expertise?"],
-      "answer": "iOS: Swift, SwiftUI, UIKit, SwiftData, Swift Concurrency, RxSwift, WidgetKit, App Intents, StoreKit 2, MapKit, PDFKit, Core ML\nAlso: Kotlin Multiplatform, JavaScript, React, Angular\nArchitecture: MVVM, MVP, MVC, VIPER\nTooling: SPM, CocoaPods, Carthage, Swift Testing, GitHub Actions, Jenkins, Travis CI, TestFlight\nOther: REST APIs, Swagger, Firebase, String Catalogs, Zeplin, Confluence"
+      "answer": "Here's my stack, by area:",
+      "groups": [
+        { "label": "iOS", "items": ["Swift", "SwiftUI", "UIKit", "SwiftData", "Swift Concurrency", "RxSwift", "WidgetKit", "App Intents", "StoreKit 2", "MapKit", "PDFKit", "Core ML"] },
+        { "label": "Also", "items": ["Kotlin Multiplatform", "JavaScript", "React", "Angular"] },
+        { "label": "Architecture", "items": ["MVVM", "MVP", "MVC", "VIPER"] },
+        { "label": "Tooling", "items": ["SPM", "CocoaPods", "Carthage", "Swift Testing", "GitHub Actions", "Jenkins", "Travis CI", "TestFlight"] },
+        { "label": "Other", "items": ["REST APIs", "Swagger", "Firebase", "String Catalogs", "Zeplin", "Confluence"] }
+      ]
     },
     {
       "id": "swift-swiftui",

@@ -135,6 +135,26 @@
   .applinks { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .55rem; white-space: normal; }
   .applinks a { font-size: 15px; padding: .2rem .65rem; border-radius: 999px; background: var(--bg); }
 
+  /* Skill groups: labeled chip rows instead of a comma-wall */
+  .msg.has-groups { max-width: min(92%, 34rem); }
+  .skill-groups {
+    display: flex; flex-direction: column; gap: .8rem;
+    margin-top: .55rem; white-space: normal;
+  }
+  .skill-label {
+    display: block; margin: 0 0 .3rem;
+    font-size: 12px; font-weight: 600; line-height: 1.2;
+    color: var(--muted); letter-spacing: .02em;
+  }
+  .skill-pills { display: flex; flex-wrap: wrap; gap: .3rem .32rem; }
+  .skill-pills span {
+    font-size: 13px; line-height: 1.25;
+    padding: .18rem .5rem; border-radius: .55rem;
+    border: 1px solid var(--hair);
+    background: color-mix(in srgb, var(--ink) 5%, transparent);
+    color: var(--ink);
+  }
+
   /* Bubble tails on the last message of each group */
   .tail::before, .tail::after { content: ""; position: absolute; bottom: 0; height: 1.1rem; }
   .tail.me::before { right: -.4rem; width: 1.1rem; background: var(--blue); border-bottom-left-radius: .95rem .8rem; }
@@ -385,6 +405,13 @@
     ? `<span class="applinks">${links.map(l => `<a href="${esc(l.url)}" target="_blank" rel="noopener">${esc(l.label)}</a>`).join('')}</span>`
     : '';
 
+  const skillGroups = groups => groups?.length
+    ? `<div class="skill-groups">${groups.map(g =>
+        `<div class="skill-group"><span class="skill-label">${esc(g.label)}</span>` +
+        `<span class="skill-pills">${(g.items || []).map(i => `<span>${esc(i)}</span>`).join('')}</span></div>`
+      ).join('')}</div>`
+    : '';
+
   function bubble(who, html) {
     const last = log.lastElementChild;
     const el = document.createElement('div');
@@ -413,7 +440,8 @@
       if (!kb) { typing.textContent = 'This page couldn’t load its answers. Email me at carlosanielrf@gmail.com.'; return; }
       const direct = topicId && kb.topics.find(t => t.id === topicId);
       const [topic] = await Promise.all([direct || answerFor(text), wait(500 + Math.random() * 400)]);
-      typing.innerHTML = linkify(topic.answer) + appLinks(topic.links);
+      typing.classList.toggle('has-groups', !!topic.groups?.length);
+      typing.innerHTML = linkify(topic.answer) + skillGroups(topic.groups) + appLinks(topic.links);
       scrollDown();
     });
   }
