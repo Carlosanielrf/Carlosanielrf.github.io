@@ -135,6 +135,24 @@
   .applinks { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .55rem; white-space: normal; }
   .applinks a { font-size: 15px; padding: .2rem .65rem; border-radius: 999px; background: var(--bg); }
 
+  /* Skill groups: category label + soft pills instead of a wall of commas */
+  .msg.has-groups { max-width: min(92%, 34rem); }
+  .skill-groups {
+    display: flex; flex-direction: column; gap: .7rem;
+    margin-top: .55rem; white-space: normal;
+  }
+  .skill-label {
+    display: block; margin: 0 0 .28rem;
+    font-size: 12px; font-weight: 600; line-height: 1.2;
+    color: var(--muted); letter-spacing: .01em;
+  }
+  .skill-pills { display: flex; flex-wrap: wrap; gap: .28rem; }
+  .skill-pills span {
+    font-size: 14px; line-height: 1.25;
+    padding: .22rem .55rem; border-radius: 999px;
+    background: var(--bg); color: var(--ink);
+  }
+
   /* Bubble tails on the last message of each group */
   .tail::before, .tail::after { content: ""; position: absolute; bottom: 0; height: 1.1rem; }
   .tail.me::before { right: -.4rem; width: 1.1rem; background: var(--blue); border-bottom-left-radius: .95rem .8rem; }
@@ -385,10 +403,17 @@
     ? `<span class="applinks">${links.map(l => `<a href="${esc(l.url)}" target="_blank" rel="noopener">${esc(l.label)}</a>`).join('')}</span>`
     : '';
 
-  function bubble(who, html) {
+  const skillGroups = groups => groups?.length
+    ? `<div class="skill-groups">${groups.map(g =>
+        `<div class="skill-group"><span class="skill-label">${esc(g.label)}</span>` +
+        `<span class="skill-pills">${(g.items || []).map(i => `<span>${esc(i)}</span>`).join('')}</span></div>`
+      ).join('')}</div>`
+    : '';
+
+  function bubble(who, html, extraClass) {
     const last = log.lastElementChild;
     const el = document.createElement('div');
-    el.className = `msg ${who} tail`;
+    el.className = `msg ${who} tail${extraClass ? ` ${extraClass}` : ''}`;
     if (last?.classList.contains(who)) last.classList.remove('tail');
     else el.classList.add('first');
     el.innerHTML = html;
@@ -413,7 +438,8 @@
       if (!kb) { typing.textContent = 'This page couldn’t load its answers. Email me at carlosanielrf@gmail.com.'; return; }
       const direct = topicId && kb.topics.find(t => t.id === topicId);
       const [topic] = await Promise.all([direct || answerFor(text), wait(500 + Math.random() * 400)]);
-      typing.innerHTML = linkify(topic.answer) + appLinks(topic.links);
+      typing.classList.toggle('has-groups', !!topic.groups?.length);
+      typing.innerHTML = linkify(topic.answer) + skillGroups(topic.groups) + appLinks(topic.links);
       scrollDown();
     });
   }
