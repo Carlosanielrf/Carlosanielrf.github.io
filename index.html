@@ -135,22 +135,24 @@
   .applinks { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .55rem; white-space: normal; }
   .applinks a { font-size: 15px; padding: .2rem .65rem; border-radius: 999px; background: var(--bg); }
 
-  /* Skill groups: category label + soft pills instead of a wall of commas */
+  /* Skill groups: labeled chip rows instead of a comma-wall */
   .msg.has-groups { max-width: min(92%, 34rem); }
   .skill-groups {
-    display: flex; flex-direction: column; gap: .7rem;
+    display: flex; flex-direction: column; gap: .8rem;
     margin-top: .55rem; white-space: normal;
   }
   .skill-label {
-    display: block; margin: 0 0 .28rem;
+    display: block; margin: 0 0 .3rem;
     font-size: 12px; font-weight: 600; line-height: 1.2;
-    color: var(--muted); letter-spacing: .01em;
+    color: var(--muted); letter-spacing: .02em;
   }
-  .skill-pills { display: flex; flex-wrap: wrap; gap: .28rem; }
+  .skill-pills { display: flex; flex-wrap: wrap; gap: .3rem .32rem; }
   .skill-pills span {
-    font-size: 14px; line-height: 1.25;
-    padding: .22rem .55rem; border-radius: 999px;
-    background: var(--bg); color: var(--ink);
+    font-size: 13px; line-height: 1.25;
+    padding: .18rem .5rem; border-radius: .55rem;
+    border: 1px solid var(--hair);
+    background: color-mix(in srgb, var(--ink) 5%, transparent);
+    color: var(--ink);
   }
 
   /* Bubble tails on the last message of each group */
