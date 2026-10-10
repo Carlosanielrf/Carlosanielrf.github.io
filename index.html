@@ -410,10 +410,10 @@
       ).join('')}</div>`
     : '';
 
-  function bubble(who, html, extraClass) {
+  function bubble(who, html) {
     const last = log.lastElementChild;
     const el = document.createElement('div');
-    el.className = `msg ${who} tail${extraClass ? ` ${extraClass}` : ''}`;
+    el.className = `msg ${who} tail`;
     if (last?.classList.contains(who)) last.classList.remove('tail');
     else el.classList.add('first');
     el.innerHTML = html;
