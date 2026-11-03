@@ -19,12 +19,12 @@
     {
       "id": "help",
       "questions": ["What can I ask you?", "What do you know?", "Help", "What topics can you answer?", "How does this work?"],
-      "answer": "Pretty much anything about my work: my job at Bosch, what I did before, Periplum (my own app), my tech stack, how I approach architecture and testing, my education, or how to get in touch. Just ask the way you would in person."
+      "answer": "Pretty much anything about my work: my job at Bosch, what I did before, Periplum and CoinPath (my own apps), my tech stack, how I approach architecture and testing, my education, or how to get in touch. Just ask the way you would in person."
     },
     {
       "id": "about",
       "questions": ["Who are you?", "Tell me about yourself", "Introduce yourself", "Who is Carlos?", "Give me a summary", "Tell me about your experience", "What is your background?"],
-      "answer": "I'm an iOS developer, and I've been shipping apps to the App Store for 7 years. I started on a B2B marketplace that launched in 20 countries, then a Portuguese C2C marketplace, and for the last five years I've been at Bosch, working on the apps people use to control their home heating from their phone. In my own time I built Periplum, my own iOS app, on my own from the first commit to the store listing."
+      "answer": "I'm an iOS developer, and I've been shipping apps to the App Store for 7 years. I started on a B2B marketplace that launched in 20 countries, then a Portuguese C2C marketplace, and for the last five years I've been at Bosch, working on the apps people use to control their home heating from their phone. In my own time I built two iOS apps, Periplum and CoinPath, each on my own from the first commit to the store listing."
     },
     {
       "id": "experience-years",
@@ -103,12 +103,30 @@
       "answer": "A little. I worked on a preview tool for a construction company: you pointed the camera at physical markers on site and saw foundations and structures that hadn't been built yet."
     },
     {
-      "id": "periplum",
-      "keywords": ["periplum", "side project"],
-      "questions": ["What is Periplum?", "Do you have side projects?", "Tell me about your own app", "Have you built an app alone?", "Personal projects"],
-      "answer": "Periplum is my own iOS app, and it's live on the App Store in Portugal, Spain, France, Italy, the US and the UK. I did it all myself: design, architecture, code, release, even the store listing.",
+      "id": "coinpath",
+      "keywords": ["coinpath", "coin path", "finance app", "money app"],
+      "questions": ["What is CoinPath?", "Tell me about Coin Path", "Do you have a finance app?", "Is CoinPath on the App Store?", "What is your newest app?", "Do you have a personal finance app?"],
+      "answer": "CoinPath is my newest own iOS app, and it just went live on the App Store. It's a personal finance app that brings expenses, investments and net worth into one calm, private place: monthly summaries by category, shared expense splitting, bank statement import (CSV, PDF, XLSX), a customisable budget rule like 50/30/20, and portfolio totals across brokers, with native sync for Interactive Brokers and Coinbase. Like Periplum, I built it alone, from the first commit to the store listing.",
       "links": [
-        { "label": "Periplum", "url": "https://apps.apple.com/pt/app/periplum/id6801804074" }
+        { "label": "CoinPath", "url": "https://apps.apple.com/pt/app/coinpath/id6792485196" }
+      ]
+    },
+    {
+      "id": "coinpath-tech",
+      "questions": ["What tech does CoinPath use?", "How is CoinPath built?", "Is CoinPath private?", "Does CoinPath use AI?", "CoinPath privacy and security", "Which languages does CoinPath support?"],
+      "answer": "Privacy is the point of it. Your records live on your device with an encrypted copy in your account, you sign in with Apple or Google, broker and AI credentials sit in the Keychain, and Face ID lock is optional. The AI categorisation is optional too, and uses your own API keys. You can export everything as JSON or delete your account and data whenever you want. It needs iOS 18 and comes in English, Portuguese and Spanish.",
+      "links": [
+        { "label": "CoinPath", "url": "https://apps.apple.com/pt/app/coinpath/id6792485196" }
+      ]
+    },
+    {
+      "id": "periplum",
+      "keywords": ["periplum", "side project", "side projects"],
+      "questions": ["What is Periplum?", "Do you have side projects?", "Tell me about your own app", "Have you built an app alone?", "Personal projects"],
+      "answer": "Periplum is my own iOS app, and it's live on the App Store in Portugal, Spain, France, Italy, the US and the UK. I did it all myself: design, architecture, code, release, even the store listing. My second own app, CoinPath, is a personal finance app that also just launched.",
+      "links": [
+        { "label": "Periplum", "url": "https://apps.apple.com/pt/app/periplum/id6801804074" },
+        { "label": "CoinPath", "url": "https://apps.apple.com/pt/app/coinpath/id6792485196" }
       ]
     },
     {
@@ -122,8 +140,9 @@
     {
       "id": "app-store",
       "questions": ["Can I see your apps on the App Store?", "Links to your apps", "Where can I download your apps?", "Show me your portfolio", "Which apps have you shipped?"],
-      "answer": "Sure, here's everything I've shipped or maintained. The Bosch apps and Periplum are what I'm working on now; CustoJusto and the B2B marketplace apps are from 2019 to 2021.",
+      "answer": "Sure, here's everything I've shipped or maintained. The Bosch apps, Periplum and CoinPath are what I'm working on now; CustoJusto and the B2B marketplace apps are from 2019 to 2021.",
       "links": [
+        { "label": "CoinPath", "url": "https://apps.apple.com/pt/app/coinpath/id6792485196" },
         { "label": "Periplum", "url": "https://apps.apple.com/pt/app/periplum/id6801804074" },
         { "label": "HomeCom Easy", "url": "https://apps.apple.com/de/app/homecom-easy/id1438634070" },
         { "label": "MyBuderus", "url": "https://apps.apple.com/de/app/mybuderus/id1509444082" },
