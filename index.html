@@ -91,9 +91,36 @@
   .hero h1 {
     margin: 1.1rem 0 0; font: 600 44px/1.05 var(--display); letter-spacing: -.025em;
   }
-  .hero .role { margin: .35rem 0 0; font: 400 22px/1.3 var(--display); letter-spacing: -.01em; color: var(--muted); }
-  .hero .pitch { margin: 1.25rem 0 0; max-width: 34rem; }
-  .links { display: flex; flex-wrap: wrap; gap: .5rem 1.4rem; margin: 1.1rem 0 0; padding: 0; list-style: none; font-size: 17px; }
+  .hero .role { margin: .4rem 0 0; font: 500 22px/1.3 var(--display); letter-spacing: -.01em; }
+  .hero .place { margin: .2rem 0 0; color: var(--muted); font-size: 15px; display: flex; align-items: center; gap: .3rem; }
+  .hero .pitch { margin: 1.4rem 0 0; max-width: 34rem; font-size: 18px; line-height: 1.5; }
+
+  /* Action buttons, like the top of an iOS contact card */
+  .actions { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: .5rem; max-width: 26rem; margin: 1.5rem 0 0; padding: 0; list-style: none; }
+  .actions a, .actions button {
+    width: 100%; height: 3.9rem; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: .3rem;
+    border: 0; border-radius: .8rem; background: var(--fill); color: var(--blue);
+    font-size: 12px; font-weight: 500; cursor: pointer;
+  }
+  .actions a:hover, .actions button:hover { text-decoration: none; background: var(--blue-tint); }
+  .actions svg { width: 22px; height: 22px; }
+
+  /* Info strip, like the one under an app's name on the App Store */
+  .strip {
+    display: grid; grid-template-columns: 1fr 1fr;
+    margin: 1.75rem 0 0; padding: .4rem 0; list-style: none;
+    background: var(--fill); border-radius: 1rem;
+  }
+  .strip li { padding: .7rem .6rem; text-align: center; }
+  .strip li:nth-child(2n) { border-left: 1px solid var(--hair); }
+  .strip li:nth-child(n+3) { border-top: 1px solid var(--hair); }
+  @media (min-width: 560px) {
+    .strip { grid-template-columns: repeat(4, minmax(0, 1fr)); padding: .9rem 0; }
+    .strip li { padding: 0 .6rem; border: 0 !important; }
+    .strip li + li { border-left: 1px solid var(--hair) !important; }
+  }
+  .strip small { display: block; font-size: 12px; color: var(--muted); }
+  .strip b { display: block; margin: .15rem 0; font: 600 22px/1.15 var(--display); letter-spacing: -.01em; }
 
   /* ---------- Sections ---------- */
   /* Every section opens the same way: a hairline, then the heading */
@@ -170,6 +197,12 @@
   .facts { display: grid; gap: 1.6rem; margin: 0; }
   @media (min-width: 560px) { .facts { grid-template-columns: 1fr 1fr; } }
   .facts p { margin: .1rem 0 0; }
+
+  .hobbies { display: flex; flex-wrap: wrap; gap: .5rem; margin: 0; padding: 0; list-style: none; }
+  .hobbies li {
+    display: inline-flex; align-items: center; gap: .45rem;
+    padding: .45rem .9rem; border-radius: 999px; background: var(--fill); font-size: 15px;
+  }
 
   .contact-mail { display: inline-block; margin-top: .6rem; font: 600 24px/1.3 var(--display); letter-spacing: -.01em; overflow-wrap: anywhere; }
   .colophon { margin-top: 3rem; color: var(--muted); font-size: 13px; max-width: 34rem; }
@@ -329,13 +362,21 @@
         <img class="avatar" src="photo.jpg" alt="Carlos Fonseca" width="96" height="96">
       </button>
       <h1>Carlos Fonseca</h1>
-      <p class="role">Senior iOS Developer in Coimbra, Portugal</p>
-      <p class="pitch"><span class="yrs">7</span> years shipping iOS apps people use every day: the Bosch apps that run home heating for four brands, a marketplace launched in 20 countries, and two apps of my own, built solo from first commit to App Store.</p>
-      <ul class="links" aria-label="Links">
-        <li><a href="mailto:carlosanielrf@gmail.com">Email</a></li>
-        <li><a href="https://www.linkedin.com/in/carlosaniel/" target="_blank" rel="noopener">LinkedIn</a></li>
-        <li><a href="https://github.com/Carlosanielrf" target="_blank" rel="noopener">GitHub</a></li>
-        <li><a href="cv.pdf" target="_blank">CV (PDF)</a></li>
+      <p class="role">Senior iOS Developer</p>
+      <p class="place"><svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5Z"/></svg>Coimbra, Portugal</p>
+      <ul class="actions" aria-label="Get in touch">
+        <li><button type="button" id="msg-btn"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 0 1-9 8.3 9.6 9.6 0 0 1-3.4-.6L3 21l1.5-4.2A8 8 0 0 1 3 11.5 8.4 8.4 0 0 1 12 3.2a8.4 8.4 0 0 1 9 8.3Z"/></svg>Message</button></li>
+        <li><a href="mailto:carlosanielrf@gmail.com"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="m4 7 8 6 8-6"/></svg>Email</a></li>
+        <li><a href="https://www.linkedin.com/in/carlosaniel/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="13" rx="2.5"/><path d="M8.5 7V5.5A1.5 1.5 0 0 1 10 4h4a1.5 1.5 0 0 1 1.5 1.5V7M3 12.5h18"/></svg>LinkedIn</a></li>
+        <li><a href="https://github.com/Carlosanielrf" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m8 8-4 4 4 4M16 8l4 4-4 4M13.5 5l-3 14"/></svg>GitHub</a></li>
+        <li><a href="cv.pdf" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8l-5-5Z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></svg>CV</a></li>
+      </ul>
+      <p class="pitch">I've spent <span class="yrs">7</span> years building iOS apps people use every day. Right now that means the Bosch apps that run home heating for four brands; before that, a marketplace that launched in 20 countries. In my own time I ship apps on my own, from the first commit to the App Store listing.</p>
+      <ul class="strip" aria-label="At a glance">
+        <li><small>Experience</small><b><span class="yrs">7</span> years</b><small>iOS since 2019</small></li>
+        <li><small>Apps</small><b>10</b><small>shipped or maintained</small></li>
+        <li><small>Reach</small><b>20</b><small>countries</small></li>
+        <li><small>Rating</small><b>4.5★</b><small>CustoJusto, up 2★</small></li>
       </ul>
     </header>
 
@@ -448,11 +489,18 @@
           <p>Portuguese, native</p>
           <p>English, professional working proficiency</p>
         </div>
-        <div>
-          <h3>Outside work</h3>
-          <p>Gym, running, eating out, the beach, and hiking trails with my dog</p>
-        </div>
       </div>
+    </section>
+
+    <section id="outside" aria-labelledby="h-outside">
+      <h2 id="h-outside">Outside work</h2>
+      <ul class="hobbies" aria-label="Hobbies">
+        <li><span aria-hidden="true">🏋️</span>Gym</li>
+        <li><span aria-hidden="true">🏃</span>Running</li>
+        <li><span aria-hidden="true">🥾</span>Hiking trails with my dog</li>
+        <li><span aria-hidden="true">🏖️</span>The beach</li>
+        <li><span aria-hidden="true">🍽️</span>Eating out</li>
+      </ul>
     </section>
 
     <section id="contact" aria-labelledby="h-contact">
@@ -541,6 +589,7 @@
     chatReturnFocus?.focus?.({ preventScroll: true });
   }
   openBtn.addEventListener('click', () => openChat());
+  $('msg-btn').addEventListener('click', () => openChat());
   $('chat-close').addEventListener('click', closeChat);
   scrim.addEventListener('click', closeChat);
   docked.addEventListener('change', () => { if (docked.matches) closeChat(); });

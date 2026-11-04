@@ -32,7 +32,7 @@ Other `meta` fields: `suggest` (chips after a fallback), `notEnglish` (reply to 
 
 ## Page structure
 
-The page is a regular CV (experience, own apps, skills, education and languages, contact) written as static HTML, so it reads well without typing anything and search engines can index it. The chat sits beside it: docked on the right on wide screens, and on phones a compose bar at the bottom opens it as a sheet. "Ask …" buttons in the CV send a question straight to the chat.
+The page is a regular CV (experience, personal apps, skills, background, outside work, contact) written as static HTML, so it reads well without typing anything and search engines can index it. The chat sits beside it: docked on the right on wide screens, and on phones a compose bar at the bottom opens it as a sheet. "Ask …" buttons in the CV send a question straight to the chat.
 
 The CV sections and the chat answers repeat the same facts. When a fact changes, update both `index.html` and `tools/knowledge.src.json`.
 
