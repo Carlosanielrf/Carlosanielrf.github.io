@@ -12,18 +12,25 @@ knowledge.json           what the page loads (optionally with embeddings)
 photo.jpg                avatar (480×480)
 cv.pdf                   downloadable CV
 tools/knowledge.src.json the file to edit: topics, questions, answers, links
-tools/build.mjs          precomputes embeddings → knowledge.json
+tools/build.mjs          checks the knowledge base, precomputes embeddings → knowledge.json
 ```
 
 ## Editing answers
 
 1. Edit `tools/knowledge.src.json`.
-2. Either copy it over `knowledge.json` (the browser embeds the questions on first load), or precompute embeddings:
+2. Check it with `node tools/build.mjs --check` (no download needed). It flags broken `related` ids and lists topics still marked TODO.
+3. Either copy it over `knowledge.json` (the browser embeds the questions on first load), or precompute embeddings:
    ```
    npm install --no-save @huggingface/transformers@4.3.0
    node tools/build.mjs
    ```
-3. Commit and push.
+4. Commit and push.
+
+Topic fields: `id`, `questions`, `answer`, plus optional `chip` (label when offered as a follow-up question), `related` (topic ids suggested after this answer), `keywords`, `links` and `groups`. A topic with no `chip` is still answerable but never suggested. An answer of `"TODO"` hides the topic until it's filled in. Answers can use `{iosYears}` and `{boschYears}`, computed from `meta.dates`, so they never go stale.
+
+Other `meta` fields: `suggest` (chips after a fallback), `notEnglish` (reply to questions that look Portuguese) and `goatcounter` (optional GoatCounter code; page views only, questions are never sent).
+
+The header facts and the "Prefer to skim?" summary in `index.html` repeat the essentials as static HTML, for recruiters who won't type and for search engines. Keep them in sync when a fact changes.
 
 ## Tuning
 

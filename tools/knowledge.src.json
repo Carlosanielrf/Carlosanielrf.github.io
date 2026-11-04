@@ -1,161 +1,213 @@
 {
   "meta": {
     "name": "Carlos Fonseca",
-    "fallback": "Hmm, I don't have an answer for that one. Try asking about my experience, my apps, my skills or how to reach me, or just email me at carlosanielrf@gmail.com.",
-    "threshold": 0.55
+    "fallback": "Hmm, I don't have an answer for that one. Try one of the questions below, or just email me at carlosanielrf@gmail.com.",
+    "threshold": 0.55,
+    "notEnglish": "Sou português, mas esta página só responde em inglês 🙂 Try asking in English, or tap a question below.",
+    "suggest": ["about", "timeline", "skills", "looking-for", "contact"],
+    "dates": { "iosYears": "2019-01", "boschYears": "2021-07" },
+    "goatcounter": ""
   },
   "topics": [
     {
       "id": "greeting",
+      "chip": "Hi!",
       "questions": ["Hi", "Hello", "Hey there", "Good morning", "What's up"],
-      "answer": "Hi, I'm Carlos! I build iOS apps, and I'm based in Coimbra, Portugal. Ask me anything about my work, my apps or how I like to build things."
+      "answer": "Hi, I'm Carlos! I'm a senior iOS developer based in Coimbra, Portugal. Ask me anything about my work, my apps or how I like to build things.",
+      "related": ["about", "timeline", "looking-for"]
     },
     {
       "id": "thanks",
+      "chip": "Thanks!",
       "keywords": ["thanks", "thank you", "bye"],
       "questions": ["Thanks", "Thank you", "Cool, thanks", "Great, that helps", "Bye"],
-      "answer": "Thanks for stopping by, it was nice chatting! If you'd like to keep the conversation going, drop me a line at carlosanielrf@gmail.com."
+      "answer": "Thanks for stopping by, it was nice chatting! If you'd like to keep the conversation going, drop me a line at carlosanielrf@gmail.com.",
+      "related": ["contact", "cv"]
     },
     {
       "id": "help",
+      "chip": "What can I ask?",
       "questions": ["What can I ask you?", "What do you know?", "Help", "What topics can you answer?", "How does this work?"],
-      "answer": "Pretty much anything about my work: my job at Bosch, what I did before, Periplum and CoinPath (my own apps), my tech stack, how I approach architecture and testing, my education, or how to get in touch. Just ask the way you would in person."
+      "answer": "Pretty much anything about my work: my job at Bosch, what I did before, Periplum and CoinPath (my own apps), my tech stack, how I approach architecture and testing, my career timeline, what kind of role I'm looking for, or how to get in touch. Just ask the way you would in person.",
+      "related": ["timeline", "skills", "looking-for"]
     },
     {
       "id": "about",
+      "chip": "What do you do?",
       "questions": ["Who are you?", "Tell me about yourself", "Introduce yourself", "Who is Carlos?", "Give me a summary", "Tell me about your experience", "What is your background?"],
-      "answer": "I'm an iOS developer, and I've been shipping apps to the App Store for 7 years. I started on a B2B marketplace that launched in 20 countries, then a Portuguese C2C marketplace, and for the last five years I've been at Bosch, working on the apps people use to control their home heating from their phone. In my own time I built two iOS apps, Periplum and CoinPath, each on my own from the first commit to the store listing."
+      "answer": "I'm a senior iOS developer, and I've been shipping apps to the App Store for {iosYears} years. I started on a B2B marketplace that launched in 20 countries, then a Portuguese C2C marketplace, and for the last {boschYears} years I've been at Bosch, working on the apps people use to control their home heating from their phone. In my own time I built two iOS apps, Periplum and CoinPath, each on my own from the first commit to the store listing.",
+      "related": ["bosch-apps", "periplum", "coinpath"]
+    },
+    {
+      "id": "timeline",
+      "chip": "Career timeline",
+      "questions": ["Career timeline", "Walk me through your career", "Work history", "Your career path", "Previous roles in order"],
+      "answer": "Here's the short version:\n2015–2018: Bachelor's in Multimedia, Instituto Superior Miguel Torga.\n2018–2019: Web developer at Appsconcept (IPN, Coimbra), React and Angular.\n2019–2021: iOS developer at Appsconcept, on a B2B marketplace in 20 countries and on CustoJusto.\n2021–now: iOS developer at Bosch Thermotechnology in Aveiro, on four connected-heating apps.\nOn the side: Periplum and CoinPath, my own apps on the App Store.",
+      "related": ["current-job", "previous-job", "coinpath"]
     },
     {
       "id": "experience-years",
+      "chip": "How many years of experience?",
       "questions": ["How many years of experience do you have?", "How long have you been an iOS developer?", "How senior are you?", "When did you start developing?"],
-      "answer": "About 7 years as an iOS developer, since January 2019. Before that I spent a few months doing web development, starting in September 2018."
+      "answer": "{iosYears} years as an iOS developer, since January 2019. Before that I spent a few months doing web development, starting in September 2018.",
+      "related": ["timeline", "leadership", "why-hire"]
     },
     {
       "id": "current-job",
+      "chip": "Where do you work?",
       "questions": ["Where do you work?", "What's your current job?", "Who is your employer?", "What do you do at the moment?", "What's your role at Bosch?"],
-      "answer": "I'm an iOS developer at Bosch Thermotechnology in Aveiro, and I've been there since July 2021. I build and maintain the connected-heating apps for four Bosch brands."
+      "answer": "I'm an iOS developer at Bosch Thermotechnology in Aveiro, and I've been there since July 2021. I build and maintain the connected-heating apps for four Bosch brands.",
+      "related": ["bosch-apps", "bosch-white-label", "bosch-appliance"]
     },
     {
       "id": "bosch-apps",
+      "chip": "Which apps do you work on?",
       "keywords": ["homecom", "buderus", "mybuderus", "vulcano", "ivt"],
       "questions": ["Which apps do you work on at Bosch?", "What Bosch apps have you built?", "What is HomeCom Easy?", "What is MyBuderus?", "Tell me about Vulcano Connect and IVT Anywhere"],
       "answer": "There are four: HomeCom Easy, MyBuderus, Vulcano Connect and IVT Anywhere. At heart they all do the same thing, letting people control their home heating from their phone, and they all ship from one shared iOS codebase.",
       "links": [
-        { "label": "HomeCom Easy", "url": "https://apps.apple.com/de/app/homecom-easy/id1438634070" },
-        { "label": "MyBuderus", "url": "https://apps.apple.com/de/app/mybuderus/id1509444082" },
-        { "label": "Vulcano Connect", "url": "https://apps.apple.com/pt/app/vulcano-connect/id1509445831" },
-        { "label": "IVT Anywhere", "url": "https://apps.apple.com/se/app/ivt-anywhere/id529814511" }
-      ]
+        { "label": "HomeCom Easy", "url": "https://apps.apple.com/app/id1438634070" },
+        { "label": "MyBuderus", "url": "https://apps.apple.com/app/id1509444082" },
+        { "label": "Vulcano Connect", "url": "https://apps.apple.com/app/id1509445831" },
+        { "label": "IVT Anywhere", "url": "https://apps.apple.com/app/id529814511" }
+      ],
+      "related": ["bosch-white-label", "bosch-appliance", "testing"]
     },
     {
       "id": "bosch-white-label",
+      "chip": "Four brands, one codebase?",
       "questions": ["How do you handle four brands in one codebase?", "Tell me about the shared codebase", "White label apps", "Multi-brand app architecture"],
-      "answer": "It's all one iOS codebase for the four brands. The hard part, and the interesting one, is making one interface work for a whole catalogue of appliance types and generations, and for people of all ages across lots of countries and languages."
+      "answer": "It's all one iOS codebase for the four brands. The hard part, and the interesting one, is making one interface work for a whole catalogue of appliance types and generations, and for people of all ages across lots of countries and languages.",
+      "related": ["architecture", "localization", "bosch-appliance"]
     },
     {
       "id": "bosch-appliance",
+      "chip": "Do you work with hardware?",
       "questions": ["Do you work with hardware?", "How does the app talk to the appliance?", "IoT experience", "Connected devices", "App to appliance integration"],
-      "answer": "Yes. I work on the part where the app talks to the actual heating appliance, and it has to get that right every time. When that link fails, people feel it at home, so I give it the same care as anything on screen."
+      "answer": "Yes. I work on the part where the app talks to the actual heating appliance, and it has to get that right every time. When that link fails, people feel it at home, so I give it the same care as anything on screen.",
+      "related": ["api", "coreml", "testing"]
     },
     {
       "id": "coreml",
+      "chip": "Machine learning?",
       "keywords": ["core ml", "coreml", "machine learning"],
       "questions": ["Do you have machine learning experience?", "Have you used Core ML?", "Anomaly detection", "AI experience on iOS"],
-      "answer": "A bit, yes. At Bosch I tested a Core ML model that runs on the device and spots faults in an appliance by looking at its heating and cooling data."
+      "answer": "A bit, yes. At Bosch I tested a Core ML model that runs on the device and spots faults in an appliance by looking at its heating and cooling data.",
+      "related": ["bosch-appliance", "skills"]
     },
     {
       "id": "previous-job",
+      "chip": "Where did you work before?",
       "keywords": ["appsconcept"],
       "questions": ["Where did you work before Bosch?", "What was your previous job?", "Tell me about Appsconcept", "Past experience"],
-      "answer": "Before Bosch I was at Appsconcept, at IPN in Coimbra. I joined as a web developer in September 2018, moved to iOS in January 2019, and stayed until July 2021."
+      "answer": "Before Bosch I was at Appsconcept, at IPN in Coimbra. I joined as a web developer in September 2018, moved to iOS in January 2019, and stayed until July 2021.",
+      "related": ["b2b-marketplace", "custojusto", "web-dev"]
     },
     {
       "id": "b2b-marketplace",
+      "chip": "The 20-country marketplace",
       "keywords": ["machineryzone", "agriaffaires", "truckscorner", "b2b"],
       "questions": ["What is MachineryZone?", "Tell me about Agriaffaires and Truckscorner", "What apps did you build from scratch?", "B2B marketplace experience", "Have you launched apps internationally?"],
-      "answer": "That was my big from-scratch project at Appsconcept: a B2B marketplace that launched in 20 countries as three apps, MachineryZone, Agriaffaires and Truckscorner. Three business models on one shared codebase, and all three held above 3.3★ in France, their main market.",
+      "answer": "That was my big from-scratch project at Appsconcept: a B2B marketplace that launched in 20 countries as three apps, MachineryZone, Agriaffaires and Truckscorner. Three business models on one shared codebase.",
       "links": [
-        { "label": "MachineryZone", "url": "https://apps.apple.com/fr/app/machineryzone/id1090014065" },
-        { "label": "Agriaffaires", "url": "https://apps.apple.com/fr/app/agriaffaires/id1090013490" },
-        { "label": "Truckscorner", "url": "https://apps.apple.com/fr/app/truckscorner/id1538154240" }
-      ]
+        { "label": "MachineryZone", "url": "https://apps.apple.com/app/id1090014065" },
+        { "label": "Agriaffaires", "url": "https://apps.apple.com/app/id1090013490" },
+        { "label": "Truckscorner", "url": "https://apps.apple.com/app/id1538154240" }
+      ],
+      "related": ["custojusto", "localization", "architecture"]
     },
     {
       "id": "custojusto",
+      "chip": "Biggest achievement?",
       "keywords": ["custojusto", "rating"],
       "questions": ["What is CustoJusto?", "Tell me about the app rating improvement", "Have you improved an app's rating?", "C2C marketplace", "Biggest achievement"],
       "answer": "CustoJusto is a Portuguese C2C marketplace that I maintained. I went through the reviews, fixed the problems people kept mentioning, and the App Store rating went up two stars, to 4.5★.",
       "links": [
-        { "label": "CustoJusto", "url": "https://apps.apple.com/pt/app/custojusto/id474850957" }
-      ]
+        { "label": "CustoJusto", "url": "https://apps.apple.com/app/id474850957" }
+      ],
+      "related": ["why-hire", "testing", "b2b-marketplace"]
     },
     {
       "id": "web-dev",
+      "chip": "Web experience?",
       "keywords": ["react", "angular", "web", "frontend"],
       "questions": ["Do you know web development?", "Have you worked with React or Angular?", "Web experience", "Frontend skills"],
-      "answer": "Yes, that's actually where I started. From 2018 to 2019 I worked on a big-data dashboard in React and Angular that built charts tailored to each client, and it taught me how much analytics shapes a product. I also worked on an on-site AR preview tool for a construction company."
+      "answer": "Yes, that's actually where I started. From 2018 to 2019 I worked on a big-data dashboard in React and Angular that built charts tailored to each client, and it taught me how much analytics shapes a product. I also worked on an on-site AR preview tool for a construction company.",
+      "related": ["ar", "languages-programming", "timeline"]
     },
     {
       "id": "ar",
+      "chip": "AR experience?",
       "keywords": ["augmented reality", "ar"],
       "questions": ["Augmented reality experience", "Have you done AR?", "Camera based projects", "Construction preview tool"],
-      "answer": "A little. I worked on a preview tool for a construction company: you pointed the camera at physical markers on site and saw foundations and structures that hadn't been built yet."
+      "answer": "A little. I worked on a preview tool for a construction company: you pointed the camera at physical markers on site and saw foundations and structures that hadn't been built yet.",
+      "related": ["web-dev", "skills"]
     },
     {
       "id": "coinpath",
+      "chip": "What is CoinPath?",
       "keywords": ["coinpath", "coin path", "finance app", "money app"],
       "questions": ["What is CoinPath?", "Tell me about Coin Path", "Do you have a finance app?", "Is CoinPath on the App Store?", "What is your newest app?", "Do you have a personal finance app?"],
       "answer": "CoinPath is my newest own iOS app, and it just went live on the App Store. It's a personal finance app that brings expenses, investments and net worth into one calm, private place: monthly summaries by category, shared expense splitting, bank statement import (CSV, PDF, XLSX), a customisable budget rule like 50/30/20, and portfolio totals across brokers, with native sync for Interactive Brokers and Coinbase. Like Periplum, I built it alone, from the first commit to the store listing.",
       "links": [
-        { "label": "CoinPath", "url": "https://apps.apple.com/pt/app/coinpath/id6792485196" }
-      ]
+        { "label": "CoinPath", "url": "https://apps.apple.com/app/id6792485196" }
+      ],
+      "related": ["coinpath-tech", "periplum", "why-hire"]
     },
     {
       "id": "coinpath-tech",
+      "chip": "How is CoinPath built?",
       "questions": ["What tech does CoinPath use?", "How is CoinPath built?", "Is CoinPath private?", "Does CoinPath use AI?", "CoinPath privacy and security", "Which languages does CoinPath support?"],
       "answer": "Privacy is the point of it. Your records live on your device with an encrypted copy in your account, you sign in with Apple or Google, broker and AI credentials sit in the Keychain, and Face ID lock is optional. The AI categorisation is optional too, and uses your own API keys. You can export everything as JSON or delete your account and data whenever you want. It needs iOS 18 and comes in English, Portuguese and Spanish.",
       "links": [
-        { "label": "CoinPath", "url": "https://apps.apple.com/pt/app/coinpath/id6792485196" }
-      ]
+        { "label": "CoinPath", "url": "https://apps.apple.com/app/id6792485196" }
+      ],
+      "related": ["coinpath", "periplum-tech", "testing"]
     },
     {
       "id": "periplum",
+      "chip": "Tell me about Periplum",
       "keywords": ["periplum", "side project", "side projects"],
       "questions": ["What is Periplum?", "Do you have side projects?", "Tell me about your own app", "Have you built an app alone?", "Personal projects"],
       "answer": "Periplum is my own iOS app, and it's live on the App Store in Portugal, Spain, France, Italy, the US and the UK. I did it all myself: design, architecture, code, release, even the store listing. My second own app, CoinPath, is a personal finance app that also just launched.",
       "links": [
-        { "label": "Periplum", "url": "https://apps.apple.com/pt/app/periplum/id6801804074" },
-        { "label": "CoinPath", "url": "https://apps.apple.com/pt/app/coinpath/id6792485196" }
-      ]
+        { "label": "Periplum", "url": "https://apps.apple.com/app/id6801804074" },
+        { "label": "CoinPath", "url": "https://apps.apple.com/app/id6792485196" }
+      ],
+      "related": ["periplum-tech", "coinpath", "testing"]
     },
     {
       "id": "periplum-tech",
+      "chip": "How is Periplum built?",
       "questions": ["What tech does Periplum use?", "How is Periplum built?", "Periplum architecture", "Periplum widgets and Siri"],
       "answer": "It's built with SwiftUI and SwiftData on iOS 18, with Swift 6 strict concurrency, and the domain logic lives in its own local Swift package. It has widgets for the Home Screen, Lock Screen and Control Center, App Intents so it works with Shortcuts and Siri, StoreKit 2 purchases with entitlement verification, 6 locales through String Catalogs, and Firebase for sign-in, analytics and crash reports.",
       "links": [
-        { "label": "Periplum", "url": "https://apps.apple.com/pt/app/periplum/id6801804074" }
-      ]
+        { "label": "Periplum", "url": "https://apps.apple.com/app/id6801804074" }
+      ],
+      "related": ["testing", "concurrency", "architecture"]
     },
     {
       "id": "app-store",
+      "chip": "Show me your apps",
       "questions": ["Can I see your apps on the App Store?", "Links to your apps", "Where can I download your apps?", "Show me your portfolio", "Which apps have you shipped?"],
       "answer": "Sure, here's everything I've shipped or maintained. The Bosch apps, Periplum and CoinPath are what I'm working on now; CustoJusto and the B2B marketplace apps are from 2019 to 2021.",
       "links": [
-        { "label": "CoinPath", "url": "https://apps.apple.com/pt/app/coinpath/id6792485196" },
-        { "label": "Periplum", "url": "https://apps.apple.com/pt/app/periplum/id6801804074" },
-        { "label": "HomeCom Easy", "url": "https://apps.apple.com/de/app/homecom-easy/id1438634070" },
-        { "label": "MyBuderus", "url": "https://apps.apple.com/de/app/mybuderus/id1509444082" },
-        { "label": "Vulcano Connect", "url": "https://apps.apple.com/pt/app/vulcano-connect/id1509445831" },
-        { "label": "IVT Anywhere", "url": "https://apps.apple.com/se/app/ivt-anywhere/id529814511" },
-        { "label": "CustoJusto", "url": "https://apps.apple.com/pt/app/custojusto/id474850957" },
-        { "label": "MachineryZone", "url": "https://apps.apple.com/fr/app/machineryzone/id1090014065" },
-        { "label": "Agriaffaires", "url": "https://apps.apple.com/fr/app/agriaffaires/id1090013490" },
-        { "label": "Truckscorner", "url": "https://apps.apple.com/fr/app/truckscorner/id1538154240" }
-      ]
+        { "label": "CoinPath", "url": "https://apps.apple.com/app/id6792485196" },
+        { "label": "Periplum", "url": "https://apps.apple.com/app/id6801804074" },
+        { "label": "HomeCom Easy", "url": "https://apps.apple.com/app/id1438634070" },
+        { "label": "MyBuderus", "url": "https://apps.apple.com/app/id1509444082" },
+        { "label": "Vulcano Connect", "url": "https://apps.apple.com/app/id1509445831" },
+        { "label": "IVT Anywhere", "url": "https://apps.apple.com/app/id529814511" },
+        { "label": "CustoJusto", "url": "https://apps.apple.com/app/id474850957" },
+        { "label": "MachineryZone", "url": "https://apps.apple.com/app/id1090014065" },
+        { "label": "Agriaffaires", "url": "https://apps.apple.com/app/id1090013490" },
+        { "label": "Truckscorner", "url": "https://apps.apple.com/app/id1538154240" }
+      ],
+      "related": ["periplum", "coinpath", "bosch-apps"]
     },
     {
       "id": "skills",
+      "chip": "What are your skills?",
       "keywords": ["skill", "tech stack", "technology", "technologies"],
       "questions": ["What skills do you have?", "Tell me your skills", "What are your skills?", "Skills", "What are your technical skills?", "What is your tech stack?", "What's your iOS stack?", "What technologies do you know?", "What is your expertise?"],
       "answer": "Here's my stack, by area:",
@@ -165,118 +217,206 @@
         { "label": "Architecture", "items": ["MVVM", "MVP", "MVC", "VIPER"] },
         { "label": "Tooling", "items": ["SPM", "CocoaPods", "Carthage", "Swift Testing", "GitHub Actions", "Jenkins", "Travis CI", "TestFlight"] },
         { "label": "Other", "items": ["REST APIs", "Swagger", "Firebase", "String Catalogs", "Zeplin", "Confluence"] }
-      ]
+      ],
+      "related": ["architecture", "testing", "concurrency"]
     },
     {
       "id": "swift-swiftui",
+      "chip": "SwiftUI or UIKit?",
       "questions": ["Do you use SwiftUI?", "SwiftUI or UIKit?", "Which frameworks do you know?", "Do you know UIKit?"],
-      "answer": "Swift and SwiftUI are what I use every day, and I have plenty of UIKit experience too. Along the way I've also worked with RxSwift, SwiftData, WidgetKit, App Intents, MapKit, PDFKit, StoreKit 2, Core ML and Swift Concurrency, on both iPhone and iPad."
+      "answer": "Swift and SwiftUI are what I use every day, and I have plenty of UIKit experience too. Along the way I've also worked with RxSwift, SwiftData, WidgetKit, App Intents, MapKit, PDFKit, StoreKit 2, Core ML and Swift Concurrency, on both iPhone and iPad.",
+      "related": ["architecture", "testing", "concurrency"]
     },
     {
       "id": "concurrency",
+      "chip": "Swift Concurrency?",
       "keywords": ["concurrency", "async", "actor"],
       "questions": ["Do you know Swift Concurrency?", "async await experience", "Swift 6 strict concurrency", "Actors and Sendable"],
-      "answer": "Yes, I use it in my day-to-day work, and Periplum runs on Swift 6 strict concurrency."
+      "answer": "Yes, I use it in my day-to-day work, and Periplum runs on Swift 6 strict concurrency.",
+      "related": ["periplum-tech", "testing"]
     },
     {
       "id": "languages-programming",
+      "chip": "Other languages?",
       "keywords": ["kotlin", "programming language"],
       "questions": ["Which programming languages do you know?", "Do you know Kotlin?", "Kotlin Multiplatform", "Besides Swift what languages?"],
-      "answer": "Mostly Swift. I also know Kotlin Multiplatform and JavaScript."
+      "answer": "Mostly Swift. I also know Kotlin Multiplatform and JavaScript.",
+      "related": ["android", "web-dev", "skills"]
+    },
+    {
+      "id": "android",
+      "chip": "Android?",
+      "questions": ["Do you do Android?", "Android experience", "Can you build Android apps?", "Are you a mobile developer for both platforms?", "Cross-platform experience"],
+      "answer": "iOS is my focus, and that's where my {iosYears} years are. Outside Swift I also know Kotlin Multiplatform and JavaScript.",
+      "related": ["languages-programming", "skills"]
     },
     {
       "id": "architecture",
+      "chip": "Which architectures?",
       "keywords": ["architecture", "mvvm", "viper"],
       "questions": ["What architectures do you use?", "MVVM or VIPER?", "How do you structure an app?", "Do you know clean architecture?", "Dependency management"],
-      "answer": "I've used MVVM, MVP, MVC and VIPER, and I pick whichever one actually helps the project. For dependencies I've worked with SPM, CocoaPods and Carthage. In Periplum I keep the domain logic in a local Swift package, separate from the UI."
+      "answer": "I've used MVVM, MVP, MVC and VIPER, and I pick whichever one actually helps the project. For dependencies I've worked with SPM, CocoaPods and Carthage. In Periplum I keep the domain logic in a local Swift package, separate from the UI.",
+      "related": ["testing", "bosch-white-label", "periplum-tech"]
     },
     {
       "id": "testing",
+      "chip": "Do you write tests?",
       "keywords": ["test", "testing"],
       "questions": ["Do you write tests?", "What are your testing skills?", "Testing skills", "How do you test your apps?", "Unit testing experience", "Swift Testing", "Code quality"],
-      "answer": "Yes, I do. Periplum has 449 automated tests written with Swift Testing, and CI runs them on every push. At Bosch I test the REST endpoints against the product requirements every release, so if an API contract drifts, we catch it before customers do."
+      "answer": "Yes, I do. Periplum has 449 automated tests written with Swift Testing, and CI runs them on every push. At Bosch I test the REST endpoints against the product requirements every release, so if an API contract drifts, we catch it before customers do.",
+      "related": ["ci-cd", "api", "architecture"]
     },
     {
       "id": "api",
+      "chip": "API experience?",
       "keywords": ["api", "swagger", "backend"],
       "questions": ["REST API experience", "Do you work with backends?", "Swagger", "API contracts", "Networking"],
-      "answer": "Yes. I work with REST API design and Swagger, and I check API contracts before a release, not after, so any drift gets caught before customers see it."
+      "answer": "Yes. I work with REST API design and Swagger, and I check API contracts before a release, not after, so any drift gets caught before customers see it.",
+      "related": ["testing", "bosch-appliance"]
     },
     {
       "id": "ci-cd",
+      "chip": "CI/CD?",
       "keywords": ["ci", "cd", "testflight", "jenkins"],
       "questions": ["CI/CD experience", "Which CI tools do you use?", "How do you release apps?", "GitHub Actions", "TestFlight"],
-      "answer": "I've used GitHub Actions, Jenkins and Travis CI, with TestFlight for betas. I've taken apps all the way to release, App Store listing included."
+      "answer": "I've used GitHub Actions, Jenkins and Travis CI, with TestFlight for betas. I've taken apps all the way to release, App Store listing included.",
+      "related": ["testing", "periplum"]
     },
     {
       "id": "product-design",
+      "chip": "Working with designers?",
       "questions": ["Do you work with designers?", "Product and design tools", "Analytics experience", "Firebase", "Crash reporting"],
-      "answer": "Yes. I've worked with designers through Zeplin and documented things in Confluence, and I use Firebase Analytics and Crashlytics to see what's really happening in the app. Working on analytics dashboards early on showed me how much data shapes product decisions."
+      "answer": "Yes. I've worked with designers through Zeplin and documented things in Confluence, and I use Firebase Analytics and Crashlytics to see what's really happening in the app. Working on analytics dashboards early on showed me how much data shapes product decisions.",
+      "related": ["leadership", "accessibility"]
     },
     {
       "id": "localization",
+      "chip": "Localization?",
       "keywords": ["localization", "localisation", "multilingual", "translation"],
       "questions": ["Localization experience", "Have you built multilingual apps?", "String Catalogs", "Internationalization"],
-      "answer": "Quite a lot, yes. Periplum ships in 6 locales using String Catalogs, the Bosch apps are used across many countries and languages, and the B2B marketplace launched in 20 countries."
+      "answer": "Quite a lot, yes. Periplum ships in 6 locales using String Catalogs, the Bosch apps are used across many countries and languages, and the B2B marketplace launched in 20 countries.",
+      "related": ["accessibility", "bosch-white-label"]
+    },
+    {
+      "id": "accessibility",
+      "chip": "Accessibility?",
+      "questions": ["Accessibility experience", "Do you support VoiceOver?", "Dynamic Type", "Do you build accessible apps?", "a11y"],
+      "answer": "TODO",
+      "related": ["localization", "skills"]
+    },
+    {
+      "id": "leadership",
+      "chip": "Leadership and mentoring?",
+      "questions": ["Have you led a team?", "Do you mentor other developers?", "Leadership experience", "How big is your team?", "Do you do code reviews?"],
+      "answer": "TODO",
+      "related": ["why-hire", "product-design"]
+    },
+    {
+      "id": "ryanair",
+      "chip": "Ryanair?",
+      "questions": ["What did you do for Ryanair?", "Ryanair", "Other clients", "Which clients have you worked with?"],
+      "answer": "TODO",
+      "related": ["current-job", "timeline"]
     },
     {
       "id": "education",
+      "chip": "What did you study?",
       "keywords": ["degree", "university", "study", "studied", "education"],
       "questions": ["What did you study?", "Education", "Do you have a degree?", "University"],
-      "answer": "I have a Bachelor's degree in Multimedia from Instituto Superior Miguel Torga, which I did from 2015 to 2018."
+      "answer": "I have a Bachelor's degree in Multimedia from Instituto Superior Miguel Torga, which I did from 2015 to 2018.",
+      "related": ["timeline", "web-dev"]
     },
     {
       "id": "spoken-languages",
+      "chip": "Which languages do you speak?",
       "keywords": ["speak", "english", "portuguese"],
       "questions": ["What languages do you speak?", "Do you speak English?", "Are you Portuguese?", "Spoken languages"],
-      "answer": "Portuguese is my native language, and I speak English at a professional working level."
+      "answer": "Portuguese is my native language, and I speak English at a professional working level.",
+      "related": ["remote", "location"]
     },
     {
       "id": "location",
+      "chip": "Where are you based?",
       "keywords": ["based", "city", "location"],
       "questions": ["Where are you based?", "Where do you live?", "Location", "Which city?"],
-      "answer": "I live in Coimbra, Portugal."
+      "answer": "I live in Coimbra, Portugal.",
+      "related": ["remote", "looking-for"]
     },
     {
       "id": "why-hire",
+      "chip": "Why should we hire you?",
       "questions": ["Why should we hire you?", "What are your strengths?", "What makes you different?", "What are you best at?"],
-      "answer": "I've shipped at scale: 20 countries, and four brands from one codebase. I've turned an app's reputation around, taking CustoJusto up two stars to 4.5★. And I can take an app from the first commit to the App Store on my own, like I did with Periplum. I also care about the parts users never see, like API contracts, tests and hardware integration."
+      "answer": "I've shipped at scale: 20 countries, and four brands from one codebase. I've turned an app's reputation around, taking CustoJusto up two stars to 4.5★. And I can take an app from the first commit to the App Store on my own, like I did with Periplum. I also care about the parts users never see, like API contracts, tests and hardware integration.",
+      "related": ["custojusto", "coinpath", "looking-for"]
+    },
+    {
+      "id": "looking-for",
+      "chip": "What role are you looking for?",
+      "questions": ["What role are you looking for?", "What kind of job do you want?", "What's your ideal next role?", "What are you looking for in a company?", "Next career step"],
+      "answer": "A senior iOS role, remote, or hybrid if the office is within a reasonable distance of Coimbra. If you have one in mind, I'd be glad to hear about it at carlosanielrf@gmail.com.",
+      "related": ["notice-period", "salary", "contact"]
     },
     {
       "id": "contact",
+      "chip": "How can I reach you?",
       "keywords": ["email", "contact", "linkedin", "reach you"],
       "questions": ["How can I contact you?", "What's your email?", "How do I reach you?", "Can we talk?", "Get in touch"],
-      "answer": "Email is easiest: carlosanielrf@gmail.com. You can also find me on LinkedIn at linkedin.com/in/carlosaniel. Happy to chat!"
+      "answer": "Email is easiest: carlosanielrf@gmail.com. You can also find me on LinkedIn at linkedin.com/in/carlosaniel. Happy to chat!",
+      "related": ["cv", "github"]
     },
     {
       "id": "github",
+      "chip": "Can I see your code?",
       "keywords": ["github", "repo", "repository", "repositories"],
       "questions": ["What's your GitHub?", "Can I see your code?", "Show me your repositories", "Open source"],
-      "answer": "It's github.com/Carlosanielrf, feel free to have a look around."
+      "answer": "It's github.com/Carlosanielrf, feel free to have a look around. This page is open source too: github.com/Carlosanielrf/Carlosanielrf.github.io.",
+      "related": ["this-page", "periplum-tech"]
     },
     {
       "id": "cv",
+      "chip": "Can I get your CV?",
       "keywords": ["cv", "resume"],
       "questions": ["Can I download your CV?", "Do you have a resume?", "Send me your CV", "PDF resume"],
-      "answer": "Of course. There's a PDF of my CV linked at the top of this page."
+      "answer": "Of course. There's a PDF of my CV linked at the top of this page.",
+      "related": ["contact", "timeline"]
     },
     {
       "id": "this-page",
+      "chip": "How does this chat work?",
       "keywords": ["chatgpt", "gpt", "bot"],
       "questions": ["How does this chat work?", "Is this AI?", "Are you ChatGPT?", "How was this page built?", "Is this a real person?"],
-      "answer": "No, this isn't ChatGPT. A small model runs right here in your browser and matches your question to answers I wrote myself. There's no server or API behind it, so it can't make things up about me."
+      "answer": "No, this isn't ChatGPT. A small model runs right here in your browser and matches your question to answers I wrote myself. There's no server or API behind it, so it can't make things up about me.",
+      "related": ["github", "about"]
     },
     {
       "id": "availability",
+      "chip": "Are you open to work?",
       "keywords": ["open to work", "opportunity", "opportunities", "available"],
       "questions": ["Are you open to new opportunities?", "Are you looking for a job?", "Are you available?", "Would you consider a new role?"],
-      "answer": "Yes, I'm open to new opportunities. If you have a role in mind, I'd be glad to hear about it at carlosanielrf@gmail.com."
+      "answer": "Yes, I'm open to new opportunities. If you have a role in mind, I'd be glad to hear about it at carlosanielrf@gmail.com.",
+      "related": ["looking-for", "notice-period", "remote"]
+    },
+    {
+      "id": "notice-period",
+      "chip": "Notice period?",
+      "questions": ["What's your notice period?", "When can you start?", "How soon could you join?", "Start date", "How much notice do you need to give?"],
+      "answer": "TODO",
+      "related": ["salary", "contact"]
+    },
+    {
+      "id": "salary",
+      "chip": "Salary expectations?",
+      "questions": ["What are your salary expectations?", "How much do you want to earn?", "Expected compensation", "What's your current salary?", "Salary range"],
+      "answer": "I'd rather talk compensation once we both know the role is a fit. Drop me a line at carlosanielrf@gmail.com and we can go through it.",
+      "related": ["looking-for", "contact"]
     },
     {
       "id": "remote",
+      "chip": "Remote or on-site?",
       "keywords": ["remote", "hybrid", "relocation", "relocate"],
       "questions": ["Do you work remotely?", "Are you open to relocation?", "Remote or on-site?", "Would you move abroad?"],
-      "answer": "I prefer remote. Hybrid works too, if the office is within a reasonable distance of Coimbra."
+      "answer": "I prefer remote. Hybrid works too, if the office is within a reasonable distance of Coimbra.",
+      "related": ["looking-for", "location"]
     },
     {
       "id": "age",
@@ -298,9 +438,11 @@
     },
     {
       "id": "hobbies",
+      "chip": "Outside work?",
       "keywords": ["hobby", "hobbies", "free time", "for fun", "weekend", "pet", "dog", "sport"],
       "questions": ["What do you do in your free time?", "Hobbies", "What are your hobbies?", "Tell me your hobbies", "Tell me about your hobbies", "What do you do for fun?", "What are your interests outside of work?", "What do you do on weekends?", "What do you like outside work?", "Tell me something personal", "Do you have pets?", "Do you have a dog?", "Do you do sports?"],
-      "answer": "Outside work I go to the gym and run, and I like eating out and going to the beach. Whenever I can, I go hiking on trails with my dog."
+      "answer": "Outside work I go to the gym and run, and I like eating out and going to the beach. Whenever I can, I go hiking on trails with my dog.",
+      "related": ["about", "contact"]
     }
   ]
 }
