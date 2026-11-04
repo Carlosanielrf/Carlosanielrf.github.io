@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Carlos Fonseca · Senior iOS Developer</title>
-<meta name="description" content="Carlos Fonseca, senior iOS developer in Coimbra, Portugal. 7+ years shipping to the App Store, currently at Bosch. Ask about his work, apps and skills.">
+<meta name="description" content="Carlos Fonseca, senior iOS developer in Coimbra, Portugal. 7+ years shipping to the App Store, currently at Bosch. Read the CV or ask the built-in chat.">
 <link rel="canonical" href="https://carlosanielrf.github.io/">
 <meta property="og:type" content="profile">
 <meta property="og:url" content="https://carlosanielrf.github.io/">
@@ -13,7 +13,7 @@
 <meta property="og:image" content="https://carlosanielrf.github.io/photo.jpg">
 <meta name="twitter:card" content="summary">
 <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#151312" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💬</text></svg>">
 <script type="application/ld+json">
 {
@@ -27,39 +27,49 @@
   "worksFor": { "@type": "Organization", "name": "Bosch Thermotechnology" },
   "address": { "@type": "PostalAddress", "addressLocality": "Coimbra", "addressCountry": "PT" },
   "alumniOf": { "@type": "CollegeOrUniversity", "name": "Instituto Superior Miguel Torga" },
+  "knowsLanguage": ["pt", "en"],
   "knowsAbout": ["iOS", "Swift", "SwiftUI", "UIKit", "SwiftData", "Swift Concurrency", "WidgetKit", "App Intents", "StoreKit 2", "Core ML"],
   "sameAs": ["https://www.linkedin.com/in/carlosaniel/", "https://github.com/Carlosanielrf"]
 }
 </script>
 <style>
+  /* iOS system palette: the page speaks the platform it's about */
   :root {
     --bg: #ffffff;
-    --ink: #1b1918;
-    --muted: #86827e;
-    --them: #eceae7;
-    --blue: #0a7cff;
-    --green: #1f9d55;
-    --hair: rgba(27, 25, 24, .12);
-    --bar: rgba(255, 255, 255, .78);
+    --panel: #ffffff;
+    --ink: #1c1c1e;
+    --muted: #6e6e73;
+    --them: #e9e9eb;
+    --fill: #f2f2f7;
+    --blue: #007aff;
+    --blue-tint: rgba(0, 122, 255, .1);
+    --green: #248a3d;
+    --hair: rgba(60, 60, 67, .18);
+    --veil: rgba(255, 255, 255, .8);
     --font: -apple-system, BlinkMacSystemFont, "SF Pro Text", system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    --display: -apple-system, BlinkMacSystemFont, "SF Pro Display", system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     color-scheme: light dark;
   }
   @media (prefers-color-scheme: dark) {
     :root {
-      --bg: #151312;
-      --ink: #f3f1ee;
-      --muted: #9a948e;
-      --them: #2b2826;
+      --bg: #000000;
+      --panel: #000000;
+      --ink: #f5f5f7;
+      --muted: #98989d;
+      --them: #26252a;
+      --fill: #1c1c1e;
       --blue: #0a84ff;
-      --green: #32c76f;
-      --hair: rgba(255, 255, 255, .12);
-      --bar: rgba(21, 19, 18, .78);
+      --blue-tint: rgba(10, 132, 255, .18);
+      --green: #30d158;
+      --hair: rgba(84, 84, 88, .6);
+      --veil: rgba(0, 0, 0, .78);
     }
   }
 
   * { box-sizing: border-box; }
   html {
     -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
     scrollbar-width: none; /* Firefox */
     -ms-overflow-style: none; /* legacy Edge */
   }
@@ -69,64 +79,250 @@
     min-height: 100dvh;
     background: var(--bg);
     color: var(--ink);
-    font: 17px/1.35 var(--font);
+    font: 17px/1.47 var(--font);
     -webkit-font-smoothing: antialiased;
   }
   a { color: var(--blue); text-decoration: none; }
   a:hover { text-decoration: underline; }
   :focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; border-radius: 6px; }
   .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  button { font: inherit; color: inherit; }
 
-  /* Compact bar, shown once the contact header scrolls away */
-  .bar {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 10;
-    padding: calc(env(safe-area-inset-top, 0px) + .5rem) 1rem .5rem;
-    display: flex; align-items: center; justify-content: center; gap: .55rem;
-    background: var(--bar);
+  /* ---------- Layout: CV on the left, the conversation docked on the right ---------- */
+  .page {
+    max-width: 1180px; margin: 0 auto;
+    padding: calc(env(safe-area-inset-top, 0px) + 3rem) 1.25rem calc(env(safe-area-inset-bottom, 0px) + 6.5rem);
+  }
+  .cv { max-width: 40rem; }
+  @media (min-width: 1080px) {
+    .page {
+      display: grid; grid-template-columns: minmax(0, 1fr) 390px; gap: 4.5rem; align-items: start;
+      padding: 3.5rem 2rem 4rem;
+    }
+  }
+
+  /* ---------- Hero ---------- */
+  .avatar-btn { border: 0; padding: 0; background: none; cursor: zoom-in; border-radius: 50%; display: block; }
+  .avatar { width: 96px; height: 96px; border-radius: 50%; object-fit: cover; display: block; background: var(--fill); }
+  .hero h1 {
+    margin: 1.1rem 0 0; font: 600 44px/1.05 var(--display); letter-spacing: -.025em;
+  }
+  .hero .role { margin: .35rem 0 0; font: 400 22px/1.3 var(--display); letter-spacing: -.01em; color: var(--muted); }
+  .hero .pitch { margin: 1.25rem 0 0; max-width: 34rem; }
+  .availability { margin: 1.1rem 0 0; color: var(--green); font-weight: 600; font-size: 15px; display: flex; align-items: center; gap: .5rem; }
+  .availability::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: currentColor; flex: none; }
+  .links { display: flex; flex-wrap: wrap; gap: .5rem 1.4rem; margin: 1.1rem 0 0; padding: 0; list-style: none; font-size: 17px; }
+
+  /* ---------- Sections ---------- */
+  section { padding-top: 3.25rem; }
+  section > h2 { margin: 0 0 1.1rem; font: 600 24px/1.2 var(--display); letter-spacing: -.015em; }
+  .meta { color: var(--muted); font-size: 15px; }
+  ul.plain { margin: .5rem 0 0; padding-left: 1.15rem; list-style: disc; }
+  ul.plain li + li { margin-top: .3rem; }
+  ul.plain li::marker { color: var(--muted); }
+
+  /* Experience is a real sequence, so it gets a timeline */
+  .timeline { list-style: none; margin: 0; padding: 0; }
+  .job { position: relative; padding: 0 0 2.1rem 1.6rem; border-left: 2px solid var(--hair); margin-left: 5px; }
+  .job:last-child { border-left-color: transparent; padding-bottom: 0; }
+  .job::before {
+    content: ""; position: absolute; left: -7px; top: .38rem;
+    width: 12px; height: 12px; border-radius: 50%;
+    background: var(--bg); border: 2px solid var(--muted);
+  }
+  .job.now::before { background: var(--blue); border-color: var(--blue); }
+  .job h3 { margin: 0; font-size: 19px; font-weight: 600; line-height: 1.3; }
+  .job .meta { margin: .1rem 0 0; }
+
+  /* App Store capsules */
+  .apps { display: flex; flex-wrap: wrap; gap: .4rem; margin: .8rem 0 0; padding: 0; list-style: none; }
+  .apps a {
+    display: inline-block; font-size: 14px; font-weight: 600; padding: .25rem .75rem;
+    border-radius: 999px; background: var(--fill); color: var(--blue);
+  }
+  .apps a:hover { text-decoration: none; background: var(--blue-tint); }
+
+  /* "Ask me about this": a sent-message bubble that hands the topic to the chat */
+  .ask {
+    display: inline-flex; align-items: center; gap: .4rem; margin-top: .9rem;
+    padding: .35rem .8rem .35rem .7rem; border: 0; cursor: pointer;
+    font-size: 15px; font-weight: 500; color: #fff; background: var(--blue);
+    border-radius: 1rem 1rem .3rem 1rem;
+  }
+  .ask svg { flex: none; }
+  .ask:hover { filter: brightness(1.08); }
+
+  /* Projects as App Store rows */
+  .app-row { display: grid; grid-template-columns: 64px minmax(0, 1fr); gap: 1rem; padding: 1.25rem 0; border-top: 1px solid var(--hair); }
+  .app-row:last-child { border-bottom: 1px solid var(--hair); }
+  .app-icon {
+    width: 64px; height: 64px; border-radius: 15px; display: grid; place-items: center;
+    font: 600 26px/1 var(--display); color: #fff;
+  }
+  .icon-periplum { background: linear-gradient(160deg, #3aa0ff, #0058c9); }
+  .icon-coinpath { background: linear-gradient(160deg, #3bd16f, #158a3c); }
+  .app-head { display: flex; align-items: flex-start; justify-content: space-between; gap: .75rem; }
+  .app-head h3 { margin: 0; font-size: 19px; font-weight: 600; line-height: 1.3; }
+  .app-head .meta { margin: .05rem 0 0; }
+  .view {
+    flex: none; font-size: 15px; font-weight: 600; padding: .3rem 1.05rem;
+    border-radius: 999px; background: var(--fill); color: var(--blue);
+  }
+  .view:hover { text-decoration: none; background: var(--blue-tint); }
+  .app-row p { margin: .6rem 0 0; }
+  .tags { display: flex; flex-wrap: wrap; gap: .3rem; margin: .75rem 0 0; padding: 0; list-style: none; }
+  .tags li { font-size: 13px; padding: .15rem .55rem; border-radius: .5rem; border: 1px solid var(--hair); color: var(--muted); }
+
+  /* Skills, grouped like a Settings list */
+  .skills { margin: 0; }
+  .skill-row { display: grid; gap: .45rem; padding: .9rem 0; border-top: 1px solid var(--hair); }
+  .skill-row:last-child { border-bottom: 1px solid var(--hair); }
+  .skill-row dt { font-weight: 600; font-size: 15px; }
+  .skill-row dd { margin: 0; display: flex; flex-wrap: wrap; gap: .35rem; }
+  .skill-row dd span { font-size: 14px; padding: .2rem .6rem; border-radius: .55rem; background: var(--fill); }
+  @media (min-width: 560px) {
+    .skill-row { grid-template-columns: 8.5rem minmax(0, 1fr); align-items: baseline; }
+  }
+
+  .facts { display: grid; gap: 1.6rem; margin: 0; }
+  @media (min-width: 560px) { .facts { grid-template-columns: 1fr 1fr; } }
+  .facts h3 { margin: 0; font-size: 17px; font-weight: 600; }
+  .facts p { margin: .2rem 0 0; }
+
+  .contact-mail { display: inline-block; margin-top: .6rem; font: 600 24px/1.3 var(--display); letter-spacing: -.01em; overflow-wrap: anywhere; }
+  .colophon { margin-top: 3.5rem; padding-top: 1.25rem; border-top: 1px solid var(--hair); color: var(--muted); font-size: 13px; max-width: 34rem; }
+
+  /* ---------- The conversation ---------- */
+  .chat {
+    display: flex; flex-direction: column; background: var(--panel);
+  }
+  @media (min-width: 1080px) {
+    .chat {
+      position: sticky; top: 1.5rem; height: calc(100dvh - 3rem); max-height: 52rem;
+      border: 1px solid var(--hair); border-radius: 2rem; overflow: hidden;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, .04), 0 12px 40px rgba(0, 0, 0, .06);
+    }
+    .chat-close, .grabber, .launcher { display: none !important; }
+  }
+  @media (max-width: 1079.98px) {
+    /* An iOS sheet that rises from the compose bar */
+    .chat {
+      position: fixed; z-index: 30; left: 0; right: 0; bottom: 0;
+      top: calc(env(safe-area-inset-top, 0px) + .6rem);
+      border-radius: 1.1rem 1.1rem 0 0;
+      box-shadow: 0 -8px 40px rgba(0, 0, 0, .18);
+      transform: translateY(105%); visibility: hidden;
+      transition: transform .32s cubic-bezier(.2, .8, .2, 1), visibility 0s linear .32s;
+    }
+    .chat.open { transform: none; visibility: visible; transition: transform .32s cubic-bezier(.2, .8, .2, 1); }
+    .scrim {
+      position: fixed; inset: 0; z-index: 25; background: rgba(0, 0, 0, .35);
+      opacity: 0; pointer-events: none; transition: opacity .3s;
+    }
+    .scrim.show { opacity: 1; pointer-events: auto; }
+  }
+  .grabber { width: 36px; height: 5px; border-radius: 3px; background: var(--hair); margin: .45rem auto 0; flex: none; }
+  .chat-head {
+    flex: none; display: flex; align-items: center; gap: .65rem;
+    padding: .7rem 1rem .75rem; border-bottom: 1px solid var(--hair);
+  }
+  .chat-head img { width: 36px; height: 36px; border-radius: 50%; object-fit: cover; }
+  .chat-head b { display: block; font-size: 15px; line-height: 1.2; }
+  .chat-head small { display: block; font-size: 12px; color: var(--muted); line-height: 1.3; }
+  .chat-close { margin-left: auto; border: 0; background: none; color: var(--blue); font-size: 17px; font-weight: 600; cursor: pointer; padding: .3rem .2rem; }
+
+  .chat-body { flex: 1; overflow-y: auto; overscroll-behavior: contain; padding: 1rem 1rem 1.2rem; scrollbar-width: none; }
+  .chat-body::-webkit-scrollbar { display: none; }
+  .log { display: flex; flex-direction: column; gap: 2px; font-size: 16px; line-height: 1.35; }
+  .msg {
+    position: relative; max-width: 82%;
+    padding: .45rem .8rem; border-radius: 1.15rem;
+    overflow-wrap: anywhere; white-space: pre-line;
+  }
+  .msg.first { margin-top: .55rem; }
+  .log > .msg:first-child { margin-top: 0; }
+  .them { align-self: flex-start; background: var(--them); color: var(--ink); }
+  .me { align-self: flex-end; background: var(--blue); color: #fff; }
+  .me a { color: #fff; text-decoration: underline; }
+  .applinks { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .55rem; white-space: normal; }
+  .applinks a { font-size: 14px; padding: .2rem .65rem; border-radius: 999px; background: var(--panel); }
+
+  .msg.has-groups { max-width: 94%; }
+  .skill-groups { display: flex; flex-direction: column; gap: .75rem; margin-top: .55rem; white-space: normal; }
+  .skill-label { display: block; margin: 0 0 .3rem; font-size: 12px; font-weight: 600; line-height: 1.2; color: var(--muted); }
+  .skill-pills { display: flex; flex-wrap: wrap; gap: .3rem; }
+  .skill-pills span {
+    font-size: 13px; line-height: 1.25; padding: .18rem .5rem; border-radius: .55rem;
+    border: 1px solid var(--hair); background: color-mix(in srgb, var(--ink) 5%, transparent);
+  }
+
+  .tail::before, .tail::after { content: ""; position: absolute; bottom: 0; height: 1.1rem; }
+  .tail.me::before { right: -.4rem; width: 1.1rem; background: var(--blue); border-bottom-left-radius: .95rem .8rem; }
+  .tail.me::after { right: -.65rem; width: .65rem; background: var(--panel); border-bottom-left-radius: .6rem; }
+  .tail.them::before { left: -.4rem; width: 1.1rem; background: var(--them); border-bottom-right-radius: .95rem .8rem; }
+  .tail.them::after { left: -.65rem; width: .65rem; background: var(--panel); border-bottom-right-radius: .6rem; }
+
+  .typing { display: inline-flex; gap: 4px; padding: .1rem 0; }
+  .typing i { width: 7px; height: 7px; border-radius: 50%; background: var(--muted); opacity: .45; animation: blink 1.2s infinite; }
+  .typing i:nth-child(2) { animation-delay: .2s; }
+  .typing i:nth-child(3) { animation-delay: .4s; }
+  @keyframes blink { 30% { opacity: 1; } }
+
+  .chips { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: .4rem; margin-top: .9rem; }
+  .chips[hidden] { display: none; }
+  .chips button {
+    font-size: 14px; color: var(--blue); background: transparent;
+    border: 1px solid var(--blue); border-radius: 999px; padding: .3rem .75rem; cursor: pointer;
+  }
+  .chips button:hover { background: var(--blue-tint); }
+
+  .composer { flex: none; padding: .55rem .75rem calc(env(safe-area-inset-bottom, 0px) + .45rem); border-top: 1px solid var(--hair); }
+  .composer form { position: relative; }
+  .composer input {
+    width: 100%; font: inherit; font-size: 16px; color: var(--ink);
+    background: var(--panel); border: 1px solid var(--hair); border-radius: 999px;
+    padding: .45rem 2.7rem .45rem .95rem; outline: none;
+  }
+  .composer input:focus { border-color: var(--muted); }
+  .composer input::placeholder { color: var(--muted); }
+  .send {
+    position: absolute; right: 4px; top: 50%; transform: translateY(-50%);
+    width: 28px; height: 28px; border-radius: 50%; border: 0; padding: 0;
+    background: var(--blue); color: #fff; display: grid; place-items: center; cursor: pointer;
+  }
+  .send:disabled { background: var(--muted); opacity: .45; cursor: default; }
+  .status { margin: .3rem 0 0; text-align: center; font-size: 11px; color: var(--muted); min-height: 1em; }
+
+  /* Mobile: a Messages compose bar that opens the sheet */
+  .launcher {
+    position: fixed; z-index: 20; left: 0; right: 0; bottom: 0;
+    padding: .6rem 1rem calc(env(safe-area-inset-bottom, 0px) + .6rem);
+    background: var(--veil);
     -webkit-backdrop-filter: saturate(180%) blur(20px);
     backdrop-filter: saturate(180%) blur(20px);
-    border-bottom: 1px solid var(--hair);
-    font-size: 15px; font-weight: 600;
-    transform: translateY(-100%); transition: transform .25s ease;
+    border-top: 1px solid var(--hair);
   }
-  .bar.show { transform: none; }
-  .bar small { font-weight: 400; color: var(--muted); }
-  .bar img { width: 28px; height: 28px; border-radius: 50%; }
+  .launcher button {
+    width: 100%; display: flex; align-items: center; gap: .6rem; cursor: text;
+    padding: .5rem .5rem .5rem 1rem; border: 1px solid var(--hair); border-radius: 999px;
+    background: var(--bg); color: var(--muted); font-size: 16px; text-align: left;
+  }
+  .launcher button span { flex: 1; }
+  .launcher button i {
+    width: 28px; height: 28px; border-radius: 50%; background: var(--blue); color: #fff;
+    display: grid; place-items: center; font-style: normal;
+  }
 
-  .thread {
-    max-width: 44rem; margin: 0 auto;
-    padding: calc(env(safe-area-inset-top, 0px) + 2.5rem) 1rem calc(env(safe-area-inset-bottom, 0px) + 7.5rem);
-  }
-
-  /* Contact header, like the top of a Messages thread */
-  .contact { text-align: center; }
-  .avatar-btn {
-    display: block; margin: 0 auto; padding: 0; border: 0; background: transparent;
-    border-radius: 50%; cursor: zoom-in; -webkit-tap-highlight-color: transparent;
-  }
-  .avatar {
-    width: 112px; height: 112px; border-radius: 50%; object-fit: cover; display: block;
-    background: var(--them); pointer-events: none;
-  }
-  .avatar-btn:hover .avatar { opacity: .92; }
-
-  /* Full-size photo lightbox */
+  /* Larger photo on avatar tap */
   .lightbox {
-    position: fixed; inset: 0; z-index: 40;
-    display: grid; place-items: center;
-    padding: max(1.5rem, env(safe-area-inset-top, 0px)) 1.5rem max(1.5rem, env(safe-area-inset-bottom, 0px));
-    background: rgba(0, 0, 0, .55);
-    -webkit-backdrop-filter: blur(12px);
-    backdrop-filter: blur(12px);
-    opacity: 0; visibility: hidden; pointer-events: none;
-    transition: opacity .2s ease, visibility .2s ease;
+    position: fixed; inset: 0; z-index: 40; display: grid; place-items: center;
+    background: rgba(0, 0, 0, .78); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+    opacity: 0; visibility: hidden; pointer-events: none; transition: opacity .2s ease, visibility .2s;
   }
   .lightbox.open { opacity: 1; visibility: visible; pointer-events: auto; }
   .lightbox img {
-    width: min(80vw, 22rem); height: min(80vw, 22rem);
-    border-radius: 50%; object-fit: cover;
-    box-shadow: 0 12px 40px rgba(0, 0, 0, .35);
-    transform: scale(.92); transition: transform .2s ease;
+    width: min(80vw, 22rem); height: min(80vw, 22rem); border-radius: 50%; object-fit: cover;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, .35); transform: scale(.92); transition: transform .2s ease;
   }
   .lightbox.open img { transform: none; }
   .lightbox-close {
@@ -135,197 +331,197 @@
     background: rgba(255, 255, 255, .18); color: #fff; font-size: 22px; line-height: 1;
     cursor: pointer; display: grid; place-items: center;
   }
-  .lightbox-close:hover { background: rgba(255, 255, 255, .28); }
-  .contact h1 { margin: .75rem 0 .15rem; font-size: 28px; font-weight: 600; letter-spacing: -.01em; line-height: 1.15; }
-  .contact .role { margin: 0; color: var(--muted); font-size: 15px; }
-  .facts { display: flex; justify-content: center; flex-wrap: wrap; gap: .35rem; margin: .8rem 0 0; padding: 0; list-style: none; font-size: 13px; }
-  .facts li { padding: .2rem .6rem; border-radius: 999px; background: var(--them); }
-  .facts .open { color: var(--green); font-weight: 600; background: color-mix(in srgb, var(--green) 12%, transparent); }
-  .facts .open::before { content: ""; display: inline-block; width: 7px; height: 7px; margin-right: .35rem; border-radius: 50%; background: currentColor; vertical-align: 1px; }
-  .links { display: flex; justify-content: center; flex-wrap: wrap; gap: .35rem 1.1rem; margin-top: .9rem; font-size: 15px; }
-
-  /* Static summary for people who'd rather skim (and for search engines) */
-  .glance { margin: 1.1rem auto 0; max-width: 34rem; text-align: left; font-size: 15px; }
-  .glance summary { cursor: pointer; text-align: center; color: var(--blue); list-style: none; }
-  .glance summary::-webkit-details-marker { display: none; }
-  .glance summary::after { content: " ›"; display: inline-block; transition: transform .2s; }
-  .glance[open] summary::after { transform: rotate(90deg); }
-  .glance .card { margin-top: .8rem; padding: .9rem 1rem; border: 1px solid var(--hair); border-radius: 1rem; }
-  .glance h2 { margin: 0 0 .35rem; font-size: 12px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; color: var(--muted); }
-  .glance h2:not(:first-child) { margin-top: .9rem; }
-  .glance ul { margin: 0; padding-left: 1.1rem; }
-  .glance li + li { margin-top: .2rem; }
-  .glance p { margin: 0; }
-  .glance .when { color: var(--muted); }
-
-  .stamp { margin: 2rem 0 .75rem; text-align: center; color: var(--muted); font-size: 12px; }
-  .stamp b { font-weight: 600; }
-
-  /* Messages */
-  .log { display: flex; flex-direction: column; gap: 2px; }
-  .msg {
-    position: relative; max-width: min(80%, 32rem);
-    padding: .45rem .8rem; border-radius: 1.15rem;
-    overflow-wrap: anywhere; white-space: pre-line;
-  }
-  .msg.first { margin-top: .6rem; }
-  .log > .msg:first-child { margin-top: 0; }
-  .them { align-self: flex-start; background: var(--them); color: var(--ink); }
-  .me { align-self: flex-end; background: var(--blue); color: #fff; }
-  .me a { color: #fff; text-decoration: underline; }
-  .applinks { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .55rem; white-space: normal; }
-  .applinks a { font-size: 15px; padding: .2rem .65rem; border-radius: 999px; background: var(--bg); }
-
-  /* Skill groups: labeled chip rows instead of a comma-wall */
-  .msg.has-groups { max-width: min(92%, 34rem); }
-  .skill-groups {
-    display: flex; flex-direction: column; gap: .8rem;
-    margin-top: .55rem; white-space: normal;
-  }
-  .skill-label {
-    display: block; margin: 0 0 .3rem;
-    font-size: 12px; font-weight: 600; line-height: 1.2;
-    color: var(--muted); letter-spacing: .02em;
-  }
-  .skill-pills { display: flex; flex-wrap: wrap; gap: .3rem .32rem; }
-  .skill-pills span {
-    font-size: 13px; line-height: 1.25;
-    padding: .18rem .5rem; border-radius: .55rem;
-    border: 1px solid var(--hair);
-    background: color-mix(in srgb, var(--ink) 5%, transparent);
-    color: var(--ink);
-  }
-
-  /* Bubble tails on the last message of each group */
-  .tail::before, .tail::after { content: ""; position: absolute; bottom: 0; height: 1.1rem; }
-  .tail.me::before { right: -.4rem; width: 1.1rem; background: var(--blue); border-bottom-left-radius: .95rem .8rem; }
-  .tail.me::after { right: -.65rem; width: .65rem; background: var(--bg); border-bottom-left-radius: .6rem; }
-  .tail.them::before { left: -.4rem; width: 1.1rem; background: var(--them); border-bottom-right-radius: .95rem .8rem; }
-  .tail.them::after { left: -.65rem; width: .65rem; background: var(--bg); border-bottom-right-radius: .6rem; }
-
-  .typing { display: inline-flex; gap: 4px; padding: .1rem 0; }
-  .typing i { width: 7px; height: 7px; border-radius: 50%; background: var(--muted); opacity: .45; animation: blink 1.2s infinite; }
-  .typing i:nth-child(2) { animation-delay: .2s; }
-  .typing i:nth-child(3) { animation-delay: .4s; }
-  @keyframes blink { 30% { opacity: 1; } }
-
-  /* Suggested questions, right-aligned like quick replies */
-  .chips { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: .45rem; margin-top: 1rem; }
-  .chips[hidden] { display: none; }
-  .chips button {
-    font: inherit; font-size: 15px; color: var(--blue);
-    background: transparent; border: 1px solid var(--blue); border-radius: 999px;
-    padding: .35rem .8rem; cursor: pointer;
-  }
-  .chips button:hover { background: color-mix(in srgb, var(--blue) 10%, transparent); }
-
-  /* Composer */
-  .composer {
-    position: fixed; left: 0; right: 0; bottom: 0; z-index: 10;
-    padding: .6rem 1rem calc(env(safe-area-inset-bottom, 0px) + .5rem);
-    background: var(--bar);
-    -webkit-backdrop-filter: saturate(180%) blur(20px);
-    backdrop-filter: saturate(180%) blur(20px);
-    border-top: 1px solid var(--hair);
-  }
-  .composer form { max-width: 44rem; margin: 0 auto; position: relative; }
-  .composer input {
-    width: 100%; font: inherit; font-size: 17px; color: var(--ink);
-    background: var(--bg); border: 1px solid var(--hair); border-radius: 999px;
-    padding: .5rem 2.9rem .5rem 1rem; outline: none;
-  }
-  .composer input:focus { border-color: var(--muted); }
-  .composer input::placeholder { color: var(--muted); }
-  .send {
-    position: absolute; right: 4px; top: 50%; transform: translateY(-50%);
-    width: 30px; height: 30px; border-radius: 50%; border: 0; padding: 0;
-    background: var(--blue); color: #fff; display: grid; place-items: center; cursor: pointer;
-  }
-  .send:disabled { background: var(--muted); opacity: .45; cursor: default; }
-  .status { max-width: 44rem; margin: .35rem auto 0; text-align: center; font-size: 12px; color: var(--muted); min-height: 1em; }
 
   @media (prefers-reduced-motion: reduce) {
-    .bar { transition: none; }
-    .lightbox, .lightbox img { transition: none; }
+    html { scroll-behavior: auto; }
+    .chat, .chat.open, .scrim, .lightbox, .lightbox img { transition: none; }
     .typing i { animation: none; opacity: .8; }
-    .glance summary::after { transition: none; }
   }
 </style>
 </head>
 <body>
 
-<div class="bar" id="bar" aria-hidden="true">
-  <img src="photo.jpg" alt="">
-  <span>Carlos Fonseca <small>· Senior iOS Developer</small></span>
+<div class="page">
+  <main class="cv">
+    <header class="hero">
+      <button type="button" class="avatar-btn" id="avatar-btn" aria-label="View larger photo of Carlos Fonseca">
+        <img class="avatar" src="photo.jpg" alt="Carlos Fonseca" width="96" height="96">
+      </button>
+      <h1>Carlos Fonseca</h1>
+      <p class="role">Senior iOS Developer in Coimbra, Portugal</p>
+      <p class="pitch"><span class="yrs">7</span> years shipping iOS apps people use every day: the Bosch apps that run home heating for four brands, a marketplace launched in 20 countries, and two apps of my own, built solo from first commit to App Store.</p>
+      <p class="availability">Open to senior iOS roles, remote or hybrid near Coimbra</p>
+      <ul class="links" aria-label="Links">
+        <li><a href="mailto:carlosanielrf@gmail.com">Email</a></li>
+        <li><a href="https://www.linkedin.com/in/carlosaniel/" target="_blank" rel="noopener">LinkedIn</a></li>
+        <li><a href="https://github.com/Carlosanielrf" target="_blank" rel="noopener">GitHub</a></li>
+        <li><a href="cv.pdf" target="_blank">CV (PDF)</a></li>
+      </ul>
+    </header>
+
+    <section id="experience" aria-labelledby="h-experience">
+      <h2 id="h-experience">Experience</h2>
+      <ol class="timeline">
+        <li class="job now">
+          <h3>iOS Developer, Bosch Thermotechnology</h3>
+          <p class="meta">Aveiro, July 2021 to now</p>
+          <ul class="plain">
+            <li>Build and maintain the connected-heating apps for four Bosch brands, all shipping from one shared iOS codebase.</li>
+            <li>Adapt one interface to a whole catalogue of appliance types and generations, for users of every age across many countries and languages.</li>
+            <li>Work on the app-to-appliance integration, and test REST endpoints against product requirements every release so contract drift never reaches customers.</li>
+            <li>Tested an on-device Core ML model that detects appliance faults from heating and cooling data.</li>
+          </ul>
+          <ul class="apps" aria-label="Bosch apps on the App Store">
+            <li><a href="https://apps.apple.com/app/id1438634070" target="_blank" rel="noopener">HomeCom Easy</a></li>
+            <li><a href="https://apps.apple.com/app/id1509444082" target="_blank" rel="noopener">MyBuderus</a></li>
+            <li><a href="https://apps.apple.com/app/id1509445831" target="_blank" rel="noopener">Vulcano Connect</a></li>
+            <li><a href="https://apps.apple.com/app/id529814511" target="_blank" rel="noopener">IVT Anywhere</a></li>
+          </ul>
+          <button type="button" class="ask" data-topic="bosch-white-label" data-q="How do you handle four brands in one codebase?">Ask how four brands share one codebase</button>
+        </li>
+        <li class="job">
+          <h3>iOS Developer, Appsconcept</h3>
+          <p class="meta">IPN, Coimbra, January 2019 to July 2021</p>
+          <ul class="plain">
+            <li>Built a B2B marketplace from scratch, launched in 20 countries as three branded apps with three business models on one codebase.</li>
+            <li>Maintained CustoJusto, a Portuguese C2C marketplace, and took its App Store rating up two stars, to 4.5★, by fixing what its reviews kept naming.</li>
+          </ul>
+          <ul class="apps" aria-label="Appsconcept apps on the App Store">
+            <li><a href="https://apps.apple.com/app/id1090014065" target="_blank" rel="noopener">MachineryZone</a></li>
+            <li><a href="https://apps.apple.com/app/id1090013490" target="_blank" rel="noopener">Agriaffaires</a></li>
+            <li><a href="https://apps.apple.com/app/id1538154240" target="_blank" rel="noopener">Truckscorner</a></li>
+            <li><a href="https://apps.apple.com/app/id474850957" target="_blank" rel="noopener">CustoJusto</a></li>
+          </ul>
+          <button type="button" class="ask" data-topic="custojusto" data-q="How did you raise CustoJusto's rating?">Ask how the rating went up</button>
+        </li>
+        <li class="job">
+          <h3>Web Developer, Appsconcept</h3>
+          <p class="meta">IPN, Coimbra, September 2018 to January 2019</p>
+          <ul class="plain">
+            <li>Worked on a big-data dashboard in React and Angular that generated charts tailored to each client.</li>
+            <li>Worked on an on-site AR preview tool that let a construction firm's clients see unbuilt structures through the camera.</li>
+          </ul>
+        </li>
+      </ol>
+    </section>
+
+    <section id="projects" aria-labelledby="h-projects">
+      <h2 id="h-projects">My own apps</h2>
+      <div class="app-row">
+        <div class="app-icon icon-periplum" aria-hidden="true">P</div>
+        <div>
+          <div class="app-head">
+            <div>
+              <h3>Periplum</h3>
+              <p class="meta">Live in Portugal, Spain, France, Italy, the US and the UK</p>
+            </div>
+            <a class="view" href="https://apps.apple.com/app/id6801804074" target="_blank" rel="noopener" aria-label="View Periplum on the App Store">View</a>
+          </div>
+          <p>Designed, built and released on my own, store listing included. Domain logic lives in a local Swift package, with widgets for the Home Screen, Lock Screen and Control Center, Siri and Shortcuts through App Intents, and 449 automated tests running on every push.</p>
+          <ul class="tags" aria-label="Built with">
+            <li>SwiftUI</li><li>SwiftData</li><li>Swift 6</li><li>WidgetKit</li><li>App Intents</li><li>StoreKit 2</li><li>Swift Testing</li><li>6 locales</li>
+          </ul>
+          <button type="button" class="ask" data-topic="periplum-tech" data-q="How is Periplum built?">Ask how Periplum is built</button>
+        </div>
+      </div>
+      <div class="app-row">
+        <div class="app-icon icon-coinpath" aria-hidden="true">C</div>
+        <div>
+          <div class="app-head">
+            <div>
+              <h3>CoinPath</h3>
+              <p class="meta">Personal finance, just launched</p>
+            </div>
+            <a class="view" href="https://apps.apple.com/app/id6792485196" target="_blank" rel="noopener" aria-label="View CoinPath on the App Store">View</a>
+          </div>
+          <p>Expenses, investments and net worth in one private place: monthly summaries, shared expense splitting, bank statement import, budget rules, and portfolio totals with native sync for Interactive Brokers and Coinbase. Records stay on the device with an encrypted copy in the user's account.</p>
+          <ul class="tags" aria-label="Built with">
+            <li>iOS 18</li><li>Keychain</li><li>Face ID</li><li>Apple and Google sign-in</li><li>EN, PT, ES</li>
+          </ul>
+          <button type="button" class="ask" data-topic="coinpath-tech" data-q="How does CoinPath keep data private?">Ask how CoinPath keeps data private</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills" aria-labelledby="h-skills">
+      <h2 id="h-skills">Skills</h2>
+      <dl class="skills">
+        <div class="skill-row"><dt>iOS</dt><dd><span>Swift</span><span>SwiftUI</span><span>UIKit</span><span>SwiftData</span><span>Swift Concurrency</span><span>RxSwift</span><span>WidgetKit</span><span>App Intents</span><span>StoreKit 2</span><span>MapKit</span><span>PDFKit</span><span>Core ML</span></dd></div>
+        <div class="skill-row"><dt>Architecture</dt><dd><span>MVVM</span><span>MVP</span><span>MVC</span><span>VIPER</span><span>Swift packages</span></dd></div>
+        <div class="skill-row"><dt>Quality and release</dt><dd><span>Swift Testing</span><span>GitHub Actions</span><span>Jenkins</span><span>Travis CI</span><span>TestFlight</span><span>SPM</span><span>CocoaPods</span><span>Carthage</span></dd></div>
+        <div class="skill-row"><dt>Backend and data</dt><dd><span>REST APIs</span><span>Swagger</span><span>Firebase</span><span>String Catalogs</span></dd></div>
+        <div class="skill-row"><dt>Also</dt><dd><span>Kotlin Multiplatform</span><span>JavaScript</span><span>React</span><span>Angular</span><span>Zeplin</span><span>Confluence</span></dd></div>
+      </dl>
+      <button type="button" class="ask" data-topic="testing" data-q="How do you test your apps?">Ask how I test my apps</button>
+    </section>
+
+    <section id="more" aria-labelledby="h-more">
+      <h2 id="h-more">Education and languages</h2>
+      <div class="facts">
+        <div>
+          <h3>BSc in Multimedia</h3>
+          <p class="meta">Instituto Superior Miguel Torga, 2015 to 2018</p>
+        </div>
+        <div>
+          <h3>Portuguese and English</h3>
+          <p class="meta">Native Portuguese, professional working English</p>
+        </div>
+        <div>
+          <h3>Outside work</h3>
+          <p class="meta">Gym, running, eating out, the beach, and hiking trails with my dog</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" aria-labelledby="h-contact">
+      <h2 id="h-contact">Get in touch</h2>
+      <p>If you have a senior iOS role in mind, email me or find me on LinkedIn.</p>
+      <a class="contact-mail" href="mailto:carlosanielrf@gmail.com">carlosanielrf@gmail.com</a>
+      <p class="colophon">The chat on this page runs a small model in your browser that matches questions to answers I wrote myself. Nothing you type leaves the page. <a href="https://github.com/Carlosanielrf/Carlosanielrf.github.io" target="_blank" rel="noopener">See the source</a>.</p>
+    </section>
+  </main>
+
+  <aside class="chat" id="chat" aria-label="Chat with Carlos">
+    <div class="grabber" aria-hidden="true"></div>
+    <div class="chat-head">
+      <img src="photo.jpg" alt="" width="36" height="36">
+      <div><b>Carlos</b><small>Answers I wrote myself</small></div>
+      <button type="button" class="chat-close" id="chat-close">Done</button>
+    </div>
+    <div class="chat-body" id="chat-body">
+      <div class="log" id="log" role="log" aria-live="polite">
+        <div class="msg them first">Hi, I'm Carlos 👋</div>
+        <div class="msg them tail">Ask me anything about my work, or tap a question below.</div>
+      </div>
+      <div class="chips" id="chips">
+        <button type="button" data-topic="about">What do you do?</button>
+        <button type="button" data-topic="timeline">Career timeline</button>
+        <button type="button" data-topic="skills">What are your skills?</button>
+        <button type="button" data-topic="looking-for">What role are you looking for?</button>
+        <button type="button" data-topic="contact">How can I reach you?</button>
+      </div>
+      <noscript><p class="meta">The chat needs JavaScript. Everything important is in the CV on this page.</p></noscript>
+    </div>
+    <div class="composer">
+      <form id="form" autocomplete="off">
+        <label class="sr-only" for="q">Ask a question</label>
+        <input id="q" name="q" type="text" placeholder="Ask me something" maxlength="200" enterkeyhint="send">
+        <button class="send" id="send" type="submit" aria-label="Send" disabled>
+          <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 13V3M3.5 7.5 8 3l4.5 4.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </form>
+      <p class="status" id="status"></p>
+    </div>
+  </aside>
 </div>
 
-<main class="thread">
-  <header class="contact" id="contact">
-    <button type="button" class="avatar-btn" id="avatar-btn" aria-label="View larger photo of Carlos Fonseca">
-      <img class="avatar" src="photo.jpg" alt="Carlos Fonseca" width="112" height="112">
-    </button>
-    <h1>Carlos Fonseca</h1>
-    <p class="role">Senior iOS Developer · Coimbra, Portugal</p>
-    <ul class="facts" aria-label="At a glance">
-      <li class="open">Open to work</li>
-      <li><span class="yrs">7</span>+ years iOS</li>
-      <li>Bosch</li>
-      <li>SwiftUI · UIKit</li>
-      <li>Remote</li>
-    </ul>
-    <nav class="links" aria-label="Links">
-      <a href="https://www.linkedin.com/in/carlosaniel/" target="_blank" rel="noopener">LinkedIn</a>
-      <a href="https://github.com/Carlosanielrf" target="_blank" rel="noopener">GitHub</a>
-      <a href="cv.pdf" target="_blank">CV (PDF)</a>
-      <a href="mailto:carlosanielrf@gmail.com">Email</a>
-    </nav>
+<div class="scrim" id="scrim" aria-hidden="true"></div>
 
-    <details class="glance">
-      <summary>Prefer to skim? Read the summary</summary>
-      <div class="card">
-        <h2>Experience</h2>
-        <ul>
-          <li><b>iOS Developer, Bosch Thermotechnology</b>, Aveiro <span class="when">· 2021–now</span><br>HomeCom Easy, MyBuderus, Vulcano Connect and IVT Anywhere: four connected-heating apps from one shared codebase.</li>
-          <li><b>iOS Developer, Appsconcept</b>, Coimbra <span class="when">· 2019–2021</span><br>Built a B2B marketplace from scratch (MachineryZone, Agriaffaires, Truckscorner) launched in 20 countries. Took CustoJusto's App Store rating up two stars, to 4.5★.</li>
-          <li><b>Web Developer, Appsconcept</b> <span class="when">· 2018–2019</span><br>Big-data dashboard in React and Angular; AR preview tool for a construction firm.</li>
-          <li><b>Periplum and CoinPath</b> <span class="when">· own apps</span><br>Both built solo, from first commit to App Store. Swift 6, SwiftUI, SwiftData, widgets, App Intents, StoreKit 2; Periplum has 449 automated tests.</li>
-        </ul>
-        <h2>Stack</h2>
-        <p>Swift, SwiftUI, UIKit, SwiftData, Swift Concurrency, RxSwift, WidgetKit, App Intents, StoreKit 2, Core ML · MVVM, MVP, VIPER · Swift Testing · GitHub Actions, Jenkins, TestFlight · Firebase · Kotlin Multiplatform, JavaScript</p>
-        <h2>Education &amp; languages</h2>
-        <p>BSc in Multimedia, Instituto Superior Miguel Torga (2018) · Portuguese (native), English (professional)</p>
-      </div>
-    </details>
-  </header>
-
-  <p class="stamp"><b>Today</b> <span id="time"></span></p>
-
-  <div class="log" id="log" role="log" aria-live="polite">
-    <div class="msg them first">Hi, I'm Carlos 👋</div>
-    <div class="msg them tail">Senior iOS developer, <span class="yrs">7</span> years shipping to the App Store, currently at Bosch. Ask me anything, or tap a question below.</div>
-  </div>
-
-  <div class="chips" id="chips">
-    <button type="button" data-topic="about">What do you do?</button>
-    <button type="button" data-topic="timeline">Career timeline</button>
-    <button type="button" data-topic="skills">What are your skills?</button>
-    <button type="button" data-topic="periplum">Tell me about Periplum</button>
-    <button type="button" data-topic="coinpath">What is CoinPath?</button>
-    <button type="button" data-topic="looking-for">What role are you looking for?</button>
-  </div>
-
-  <noscript><p>This chat needs JavaScript. The summary above has the essentials, or you can <a href="cv.pdf">download my CV</a> or <a href="mailto:carlosanielrf@gmail.com">email me</a>.</p></noscript>
-</main>
-
-<div class="composer">
-  <form id="form" autocomplete="off">
-    <label class="sr-only" for="q">Ask a question</label>
-    <input id="q" name="q" type="text" placeholder="Ask me something" maxlength="200" enterkeyhint="send">
-    <button class="send" id="send" type="submit" aria-label="Send" disabled>
-      <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 13V3M3.5 7.5 8 3l4.5 4.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    </button>
-  </form>
-  <p class="status" id="status"></p>
+<div class="launcher" id="launcher">
+  <button type="button" id="open-chat" aria-controls="chat" aria-expanded="false">
+    <span>Ask me something</span>
+    <i aria-hidden="true"><svg width="16" height="16" viewBox="0 0 16 16"><path d="M8 13V3M3.5 7.5 8 3l4.5 4.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></i>
+  </button>
 </div>
 
 <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo of Carlos Fonseca" aria-hidden="true">
@@ -339,16 +535,44 @@
   const MODEL = 'Xenova/all-MiniLM-L6-v2'; // must match tools/build.mjs
   const $ = id => document.getElementById(id);
   const log = $('log'), chips = $('chips'), form = $('form'), input = $('q'), send = $('send'), status = $('status');
+  const chat = $('chat'), body = $('chat-body'), scrim = $('scrim'), openBtn = $('open-chat');
   const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const docked = matchMedia('(min-width: 1080px)');
 
-  $('time').textContent = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+  // ---------- Sheet on small screens, docked panel on large ones ----------
+  let chatReturnFocus = null;
+  function openChat({ focus = true } = {}) {
+    if (docked.matches) { if (focus) input.focus({ preventScroll: true }); return; }
+    if (chat.classList.contains('open')) return;
+    chatReturnFocus = document.activeElement;
+    chat.classList.add('open'); scrim.classList.add('show');
+    openBtn.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden';
+    if (focus) input.focus({ preventScroll: true });
+  }
+  function closeChat() {
+    if (!chat.classList.contains('open')) return;
+    chat.classList.remove('open'); scrim.classList.remove('show');
+    openBtn.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+    input.blur();
+    chatReturnFocus?.focus?.({ preventScroll: true });
+  }
+  openBtn.addEventListener('click', () => openChat());
+  $('chat-close').addEventListener('click', closeChat);
+  scrim.addEventListener('click', closeChat);
+  docked.addEventListener('change', () => { if (docked.matches) closeChat(); });
 
-  // Compact bar once the contact header is out of view
-  new IntersectionObserver(([e]) => $('bar').classList.toggle('show', !e.isIntersecting))
-    .observe($('contact'));
+  // "Ask me about this" buttons in the CV hand their question to the chat
+  document.querySelector('.cv').addEventListener('click', e => {
+    const b = e.target.closest('.ask');
+    if (!b) return;
+    openChat({ focus: false });
+    ask(b.dataset.q, b.dataset.topic);
+  });
 
-  // Larger photo on avatar tap
-  const lightbox = $('lightbox'), avatarBtn = $('avatar-btn');
+  // ---------- Larger photo on avatar tap ----------
+  const lightbox = $('lightbox');
   let lightboxReturnFocus = null;
   function openLightbox() {
     lightboxReturnFocus = document.activeElement;
@@ -363,15 +587,17 @@
     lightbox.classList.remove('open');
     lightbox.setAttribute('aria-hidden', 'true');
     $('lightbox-close').tabIndex = -1;
-    document.body.style.overflow = '';
+    document.body.style.overflow = chat.classList.contains('open') ? 'hidden' : '';
     lightboxReturnFocus?.focus?.();
     lightboxReturnFocus = null;
   }
-  avatarBtn.addEventListener('click', openLightbox);
+  $('avatar-btn').addEventListener('click', openLightbox);
   $('lightbox-close').addEventListener('click', closeLightbox);
   lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
   document.addEventListener('keydown', e => {
-    if (e.key === 'Escape' && lightbox.classList.contains('open')) closeLightbox();
+    if (e.key !== 'Escape') return;
+    if (lightbox.classList.contains('open')) closeLightbox();
+    else closeChat();
   });
 
   // ---------- Dates that would otherwise go stale ----------
@@ -478,14 +704,14 @@
   async function answerFor(q) {
     const kb = await kbReady;
     if (looksPortuguese(q)) return { answer: kb.meta.notEnglish, fallback: true };
-    if (!settled) status.textContent = 'One moment, getting ready\u2026';
+    if (!settled) status.textContent = 'One moment, getting ready…';
     await modelReady;
     const m = extractor && index ? await semanticMatch(q) : lexicalMatch(q, kb);
     console.debug('match', m.topic?.id, m.score.toFixed?.(3));
     return m.topic && m.score >= (kb.meta.threshold ?? 0.55) ? m.topic : { answer: kb.meta.fallback, fallback: true };
   }
 
-  // ---------- UI ----------
+  // ---------- Chat UI ----------
   const esc = s => s.replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
   const linkify = s => esc(s)
     .replace(/\b[\w.+-]+@[\w-]+\.[\w.]*\w\b/g, m => `<a href="mailto:${m}">${m}</a>`)
@@ -516,8 +742,7 @@
   }
 
   function scrollDown() {
-    const el = document.scrollingElement;
-    el.scrollTo({ top: el.scrollHeight, behavior: reduceMotion ? 'auto' : 'smooth' });
+    body.scrollTo({ top: body.scrollHeight, behavior: reduceMotion ? 'auto' : 'smooth' });
   }
 
   // Follow-up questions after every answer, so the conversation never dead-ends
@@ -550,8 +775,8 @@
       if (!kb) { typing.textContent = 'This page couldn’t load its answers. Email me at carlosanielrf@gmail.com.'; return; }
       const direct = topicId && kb.byId.get(topicId);
       const [topic] = await Promise.all([direct || answerFor(text), wait(500 + Math.random() * 400)]);
-      typing.classList.toggle('has-groups', !!topic.groups?.length);
       if (topic.id) asked.add(topic.id);
+      typing.classList.toggle('has-groups', !!topic.groups?.length);
       typing.innerHTML = linkify(fill(topic.answer)) + skillGroups(topic.groups) + appLinks(topic.links);
       showChips(kb, topic.fallback ? null : topic);
       scrollDown();

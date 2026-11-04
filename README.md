@@ -1,6 +1,6 @@
 # Carlos Fonseca — CV chat page
 
-A personal CV presented as a chat. Visitors ask questions and get answers I wrote myself. A small sentence-embedding model (all-MiniLM-L6-v2, via Transformers.js) runs in the visitor's browser and matches each question to the right answer. No LLM, no backend, nothing leaves the browser.
+A personal CV with a chat built in. Visitors can read it or ask questions and get answers I wrote myself. A small sentence-embedding model (all-MiniLM-L6-v2, via Transformers.js) runs in the visitor's browser and matches each question to the right answer. No LLM, no backend, nothing leaves the browser.
 
 Live at https://carlosanielrf.github.io
 
@@ -30,7 +30,11 @@ Topic fields: `id`, `questions`, `answer`, plus optional `chip` (label when offe
 
 Other `meta` fields: `suggest` (chips after a fallback), `notEnglish` (reply to questions that look Portuguese) and `goatcounter` (optional GoatCounter code; page views only, questions are never sent).
 
-The header facts and the "Prefer to skim?" summary in `index.html` repeat the essentials as static HTML, for recruiters who won't type and for search engines. Keep them in sync when a fact changes.
+## Page structure
+
+The page is a regular CV (experience, own apps, skills, education and languages, contact) written as static HTML, so it reads well without typing anything and search engines can index it. The chat sits beside it: docked on the right on wide screens, and on phones a compose bar at the bottom opens it as a sheet. "Ask …" buttons in the CV send a question straight to the chat.
+
+The CV sections and the chat answers repeat the same facts. When a fact changes, update both `index.html` and `tools/knowledge.src.json`.
 
 ## Tuning
 
