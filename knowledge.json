@@ -148,7 +148,7 @@
       "chip": "What is CoinPath?",
       "keywords": ["coinpath", "coin path", "finance app", "money app"],
       "questions": ["What is CoinPath?", "Tell me about Coin Path", "Do you have a finance app?", "Is CoinPath on the App Store?", "What is your newest app?", "Do you have a personal finance app?"],
-      "answer": "CoinPath is my newest own iOS app, and it just went live on the App Store. It's a personal finance app that brings expenses, investments and net worth into one calm, private place: monthly summaries by category, shared expense splitting, bank statement import (CSV, PDF, XLSX), a customisable budget rule like 50/30/20, and portfolio totals across brokers, with native sync for Interactive Brokers and Coinbase. Like Periplum, I built it alone, from the first commit to the store listing.",
+      "answer": "CoinPath is my personal finance app, and it just went live on the App Store. It brings spending, investments and net worth into one private place: you import bank statements (CSV or XLSX) with your own rules and duplicate detection, sync holdings from Interactive Brokers and Coinbase, split shared expenses, follow a budget rule like 50/30/20, and get a short monthly summary with one concrete thing to do.\n\nIt's local-first and works without an account. Like Periplum, I built it alone, from the first commit to the store listing.",
       "links": [
         { "label": "CoinPath", "url": "https://apps.apple.com/app/id6792485196" }
       ],
@@ -157,8 +157,8 @@
     {
       "id": "coinpath-tech",
       "chip": "How is CoinPath built?",
-      "questions": ["What tech does CoinPath use?", "How is CoinPath built?", "Is CoinPath private?", "Does CoinPath use AI?", "CoinPath privacy and security", "Which languages does CoinPath support?"],
-      "answer": "Privacy is the point of it. Your records live on your device with an encrypted copy in your account, you sign in with Apple or Google, broker and AI credentials sit in the Keychain, and Face ID lock is optional. The AI categorisation is optional too, and uses your own API keys. You can export everything as JSON or delete your account and data whenever you want. It needs iOS 18 and comes in English, Portuguese and Spanish.",
+      "questions": ["What tech does CoinPath use?", "How is CoinPath built?", "Is CoinPath private?", "Does CoinPath use AI?", "CoinPath privacy and security", "Which languages does CoinPath support?", "How does CoinPath keep data private?", "How is CoinPath private?", "Where is CoinPath data stored?"],
+      "answer": "Privacy is the point of it. The ledger lives on the device in SwiftData. If you sign in with Apple or Google, an AES-256-GCM encrypted copy is kept in your account so a new phone can restore it, and signing out clears it from the device. Broker keys sit in the Keychain, and Face ID or a PIN can lock the app.\n\nThe monthly insights run on-device by default; AI is optional and uses your own API key. Under the hood it's SwiftUI, MVVM with protocol-backed services, and StoreKit 2 subscriptions behind a Remote Config flag. It needs iOS 18 and comes in English, Portuguese and Spanish.",
       "links": [
         { "label": "CoinPath", "url": "https://apps.apple.com/app/id6792485196" }
       ],
@@ -168,8 +168,8 @@
       "id": "periplum",
       "chip": "Tell me about Periplum",
       "keywords": ["periplum", "side project", "side projects"],
-      "questions": ["What is Periplum?", "Do you have side projects?", "Tell me about your own app", "Have you built an app alone?", "Personal projects"],
-      "answer": "Periplum is my own iOS app, and it's live on the App Store in Portugal, Spain, France, Italy, the US and the UK. I did it all myself: design, architecture, code, release, even the store listing. My second own app, CoinPath, is a personal finance app that also just launched.",
+      "questions": ["What is Periplum?", "Do you have side projects?", "Tell me about your own app", "Have you built an app alone?", "Personal projects", "What does Periplum do?", "Tell me about your travel app"],
+      "answer": "Periplum is my travel app. You capture the places you visit (a restaurant, a viewpoint, a trail) with notes, photos and location, organise them into trips, and share a trip with friends as a file or a PDF itinerary. It can also read an itinerary someone already wrote as a PDF and turn it into a trip, asking about anything it can't work out on its own.\n\nI built it alone, from the design to the store listing. It's live in Portugal, Spain, France, Italy, the US and the UK, in five languages plus British English. My second app, CoinPath, a personal finance app, just launched too.",
       "links": [
         { "label": "Periplum", "url": "https://apps.apple.com/app/id6801804074" },
         { "label": "CoinPath", "url": "https://apps.apple.com/app/id6792485196" }
@@ -180,7 +180,7 @@
       "id": "periplum-tech",
       "chip": "How is Periplum built?",
       "questions": ["What tech does Periplum use?", "How is Periplum built?", "Periplum architecture", "Periplum widgets and Siri"],
-      "answer": "It's built with SwiftUI and SwiftData on iOS 18, with Swift 6 strict concurrency, and the domain logic lives in its own local Swift package. It has widgets for the Home Screen, Lock Screen and Control Center, App Intents so it works with Shortcuts and Siri, StoreKit 2 purchases with entitlement verification, 6 locales through String Catalogs, and Firebase for sign-in, analytics and crash reports.",
+      "answer": "SwiftUI and SwiftData on iOS 18, compiled with Swift 6 strict concurrency set to complete. All the domain logic (filtering and sorting the catalogue, the sharing format, feed ranking, validation) lives in a local Swift package that only depends on Foundation, so it's quick to test and even builds on Linux.\n\nAround it: widgets for quick capture on the Home Screen, Lock Screen and Control Center, App Intents for Shortcuts and Siri, Sign in with Apple and Google, a Firestore backup that only uploads what changed, a photo pipeline that never asks for full library access, and a PDF parser that reads an itinerary by its typography.",
       "links": [
         { "label": "Periplum", "url": "https://apps.apple.com/app/id6801804074" }
       ],
@@ -232,7 +232,7 @@
       "chip": "Swift Concurrency?",
       "keywords": ["concurrency", "async", "actor"],
       "questions": ["Do you know Swift Concurrency?", "async await experience", "Swift 6 strict concurrency", "Actors and Sendable"],
-      "answer": "Yes, I use it in my day-to-day work, and Periplum runs on Swift 6 strict concurrency.",
+      "answer": "Every day. Periplum compiles with Swift 6 strict concurrency set to complete, so a data race is a compile error rather than a bug someone finds in production. Sometimes that takes real work, like reducing a framework's response to a Sendable type before it crosses from a background task to the main actor. I use async/await in my day-to-day work too.",
       "related": ["periplum-tech", "testing"]
     },
     {
@@ -255,7 +255,7 @@
       "chip": "Which architectures?",
       "keywords": ["architecture", "mvvm", "viper"],
       "questions": ["What architectures do you use?", "MVVM or VIPER?", "How do you structure an app?", "Do you know clean architecture?", "Dependency management"],
-      "answer": "I've used MVVM, MVP, MVC and VIPER, and I pick whichever one actually helps the project. For dependencies I've worked with SPM, CocoaPods and Carthage. In Periplum I keep the domain logic in a local Swift package, separate from the UI.",
+      "answer": "MVVM most of the time, and I've also used MVP, MVC and VIPER where they fit. What matters more to me is where the business logic lives. In Periplum it's a local Swift package with no UI frameworks, so it's fast to test and can't get tangled with views. CoinPath is MVVM with @Observable view models talking to protocol-backed services (the ledger, statement import, broker sync), which keeps each piece easy to swap in tests.\n\nFor dependencies I've worked with SPM, CocoaPods and Carthage.",
       "related": ["testing", "bosch-white-label", "periplum-tech"]
     },
     {
@@ -263,7 +263,7 @@
       "chip": "Do you write tests?",
       "keywords": ["test", "testing"],
       "questions": ["Do you write tests?", "What are your testing skills?", "Testing skills", "How do you test your apps?", "Unit testing experience", "Swift Testing", "Code quality"],
-      "answer": "Yes, I do. Periplum has 449 automated tests written with Swift Testing, and CI runs them on every push. At Bosch I test the REST endpoints against the product requirements every release, so if an API contract drifts, we catch it before customers do.",
+      "answer": "Periplum has 449 automated tests written with Swift Testing. The domain package can be tested on its own, without a simulator, and a pre-push hook runs the whole suite plus a check that every string exists in all five languages, so a broken build or a missing translation never leaves my machine. GitHub Actions runs the same script on every release tag, and Xcode Cloud builds what goes to TestFlight.\n\nAt Bosch I test the REST endpoints against the product requirements every release, so if an API contract drifts, we catch it before customers do.",
       "related": ["ci-cd", "api", "architecture"]
     },
     {
@@ -271,7 +271,7 @@
       "chip": "API experience?",
       "keywords": ["api", "swagger", "backend"],
       "questions": ["REST API experience", "Do you work with backends?", "Swagger", "API contracts", "Networking"],
-      "answer": "Yes. I work with REST API design and Swagger, and I check API contracts before a release, not after, so any drift gets caught before customers see it.",
+      "answer": "I work with REST APIs designed in Swagger, and I check API contracts before a release, not after, so any drift gets caught before customers see it. On my own apps I've also integrated third-party APIs directly, like Interactive Brokers' Flex reports and Coinbase in CoinPath.",
       "related": ["testing", "bosch-appliance"]
     },
     {
@@ -279,7 +279,7 @@
       "chip": "CI/CD?",
       "keywords": ["ci", "cd", "testflight", "jenkins"],
       "questions": ["CI/CD experience", "Which CI tools do you use?", "How do you release apps?", "GitHub Actions", "TestFlight"],
-      "answer": "I've used GitHub Actions, Jenkins and Travis CI, with TestFlight for betas. I've taken apps all the way to release, App Store listing included.",
+      "answer": "On my own apps, a pre-push hook runs the tests locally, GitHub Actions runs the tests and text checks on release tags, and Xcode Cloud builds every TestFlight and App Store build from a version tag. In previous jobs I've also used Jenkins and Travis CI.\n\nI take apps all the way through release myself: privacy manifest, App Store Connect, screenshots generated from demo data, and store listings in several languages.",
       "related": ["testing", "periplum"]
     },
     {
@@ -294,7 +294,7 @@
       "chip": "Localization?",
       "keywords": ["localization", "localisation", "multilingual", "translation"],
       "questions": ["Localization experience", "Have you built multilingual apps?", "String Catalogs", "Internationalization"],
-      "answer": "Quite a lot, yes. Periplum ships in 6 locales using String Catalogs, the Bosch apps are used across many countries and languages, and the B2B marketplace launched in 20 countries.",
+      "answer": "Quite a lot. Periplum speaks five languages plus British English through String Catalogs, and a script fails the push if any string is missing in any language, if a plural is built by gluing an \"s\", or if the French switches between tu and vous. CoinPath ships in English, Portuguese and Spanish.\n\nThe Bosch apps serve users across many countries and languages from one codebase, and the B2B marketplace launched in 20 countries.",
       "related": ["accessibility", "bosch-white-label"]
     },
     {
