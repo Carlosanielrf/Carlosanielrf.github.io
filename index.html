@@ -238,7 +238,7 @@
       transform: translateY(105%); visibility: hidden;
       transition: transform .32s cubic-bezier(.2, .8, .2, 1), visibility 0s linear .32s;
     }
-    .chat.open { transform: none; visibility: visible; transition: transform .32s cubic-bezier(.2, .8, .2, 1), bottom .28s cubic-bezier(.2, .8, .2, 1), top .28s cubic-bezier(.2, .8, .2, 1); }
+    .chat.open { transform: none; visibility: visible; transition: transform .32s cubic-bezier(.2, .8, .2, 1), top .28s cubic-bezier(.2, .8, .2, 1); }
     .scrim {
       /* Starts a few px below the top edge and is hidden when closed: iOS Safari tints its status
          bar from fixed elements touching the top, and kept the dimmed tint after the sheet closed */
@@ -302,7 +302,7 @@
   }
   .chips button:hover { background: var(--blue-tint); }
 
-  .composer { flex: none; padding: .55rem .75rem calc(env(safe-area-inset-bottom, 0px) + .45rem); border-top: 1px solid var(--hair); }
+  .composer { flex: none; padding: .55rem .75rem calc(max(var(--kb, 0px), env(safe-area-inset-bottom, 0px)) + .45rem); transition: padding-bottom .28s cubic-bezier(.2, .8, .2, 1); border-top: 1px solid var(--hair); }
   .composer form { position: relative; }
   .composer input {
     width: 100%; font: inherit; font-size: 16px; color: var(--ink);
@@ -605,7 +605,7 @@
     openBtn.setAttribute('aria-expanded', 'false');
     input.blur();
     document.documentElement.style.overflow = '';
-    chat.style.bottom = ''; chat.style.top = '';
+    chat.style.removeProperty('--kb'); chat.style.top = '';
     const y = scrollBeforeChat;
     const restore = () => window.scrollTo({ top: y, left: 0, behavior: 'instant' });
     restore();
@@ -628,9 +628,9 @@
   // anchored to the layout viewport, which iOS scrolls and extends behind the keyboard)
   const vvp = window.visualViewport;
   function fitSheet() {
-    if (docked.matches || !vvp || !chat.classList.contains('open')) { chat.style.bottom = ''; chat.style.top = ''; return; }
+    if (docked.matches || !vvp || !chat.classList.contains('open')) { chat.style.removeProperty('--kb'); chat.style.top = ''; return; }
     const keyboard = Math.max(0, window.innerHeight - vvp.offsetTop - vvp.height);
-    chat.style.bottom = keyboard + 'px';
+    chat.style.setProperty('--kb', keyboard + 'px');
     chat.style.top = `calc(${Math.round(vvp.offsetTop)}px + env(safe-area-inset-top, 0px) + .6rem)`;
   }
   // iOS reports intermediate (and briefly wrong) offsets while the keyboard slides in, which made
