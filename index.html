@@ -324,7 +324,7 @@
   /* Mobile: a Messages compose bar that opens the sheet */
   .launcher {
     position: fixed; z-index: 20; left: 0; right: 0; bottom: 0;
-    padding: .6rem 1rem calc(env(safe-area-inset-bottom, 0px) + .6rem);
+    padding: .9rem 1rem calc(env(safe-area-inset-bottom, 0px) + .6rem);
     background: var(--veil);
     -webkit-backdrop-filter: saturate(180%) blur(20px);
     backdrop-filter: saturate(180%) blur(20px);
@@ -614,18 +614,6 @@
     restore();
     requestAnimationFrame(restore);
     [150, 400, 800].forEach(t => setTimeout(restore, t));
-  }
-  // Temporary diagnostics: open the page with ?debug to see viewport numbers on screen
-  if (location.search.includes('debug')) {
-    const d = document.createElement('pre');
-    d.style.cssText = 'position:fixed;z-index:99;left:4px;bottom:70px;margin:0;padding:4px 6px;font:11px/1.3 monospace;color:#0f0;background:rgba(0,0,0,.8);pointer-events:none';
-    document.body.append(d);
-    const vv = window.visualViewport;
-    const tick = () => {
-      d.textContent = `scrollY ${Math.round(scrollY)}  innerH ${innerHeight}\nvv.top ${vv?.offsetTop.toFixed(1)} vv.h ${vv?.height.toFixed(1)} scale ${vv?.scale}\nbody.top ${document.body.getBoundingClientRect().top.toFixed(1)} html.ovf "${document.documentElement.style.overflow}"`;
-      requestAnimationFrame(tick);
-    };
-    tick();
   }
   // Keep the sheet inside the visible area while the iOS keyboard is up (it otherwise stays
   // anchored to the layout viewport, which iOS scrolls and extends behind the keyboard)
