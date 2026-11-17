@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Carlos Fonseca — iOS {{ROLE}}</title>
+<style>
+  @page { size: A4; margin: 0; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body { font-family: "Avenir Next", Avenir, sans-serif; font-weight: 400; font-size: 11.1px; line-height: 1.52; color: #1d2230; }
+  a { color: #1a3fb8; }
+  .page { width: 794px; height: 1123px; position: relative; overflow: hidden; page-break-after: always; break-after: page; }
+  .page:last-child { page-break-after: auto; break-after: auto; }
+  .light { font-weight: 200; color: #5a5f69; }
+
+  header { height: 187px; background: #2d2926; color: #fff; position: relative; }
+  header img { position: absolute; left: 53px; top: 42px; width: 110px; height: 110px; border-radius: 50%; object-fit: cover; }
+  header h1 { position: absolute; left: 197px; top: 40px; font-size: 38px; line-height: 38px; font-weight: 700; }
+  header h1 span { display: block; font-weight: 200; }
+  header .role { position: absolute; left: 197px; top: 128px; font-size: 12px; letter-spacing: 2.7px; font-weight: 200; text-transform: uppercase; }
+  header ul { position: absolute; right: 53px; top: 40px; list-style: none; text-align: right; font-weight: 200; font-size: 11.6px; line-height: 22px; }
+  header a { color: #fff; }
+
+  .cols { position: absolute; left: 53px; right: 53px; top: 212px; display: flex; gap: 34px; }
+  .main { width: 476px; }
+  .side { width: 178px; padding-top: 4px; }
+  h2 { font-size: 19px; font-weight: 700; color: #2b3342; line-height: 1.2; }
+  .main h2 { padding-bottom: 9px; border-bottom: 1px solid #2b3342; margin-bottom: 14px; }
+  .main p { text-align: justify; hyphens: auto; }
+  .main h2.exp { margin-top: 32px; margin-bottom: 18px; }
+
+  .job { position: relative; margin-bottom: 18px; }
+  .job::before { content: ""; position: absolute; left: -2px; top: 0; width: 13px; height: 13px; border: 1px solid #5a5f69; border-radius: 50%; background: #fff; }
+  .timeline { position: relative; }
+  .timeline::before { content: ""; position: absolute; left: 4px; top: 6px; bottom: -4px; width: 1px; background: #8b8f97; }
+  .job .when { padding-left: 26px; font-weight: 600; color: #6a6e77; font-size: 12px; line-height: 14px; }
+  .job .co { padding-left: 26px; font-weight: 200; color: #5a5f69; font-size: 13px; margin-top: 4px; line-height: 18px; }
+  .job h3 { padding-left: 26px; font-size: 15px; font-weight: 700; margin-top: 4px; color: #1d2230; line-height: 22px; }
+  .job ul { list-style: none; margin-top: 7px; padding-left: 26px; }
+  .job li { position: relative; padding-left: 0; margin-bottom: 1px; text-align: justify; hyphens: auto; }
+  .job li::before { content: "•"; position: absolute; left: -14px; color: #8b8f97; font-size: 9px; top: 2px; }
+
+  .side h3 { font-size: 11.1px; font-weight: 700; color: #1d2230; margin-top: 12px; }
+  .side h3:first-of-type { margin-top: 14px; }
+  .side .light { font-size: 11.1px; }
+  .side h2.s2 { margin-top: 38px; }
+
+  .p2 { padding: 46px 53px 0; }
+  .p2 h2 { padding-bottom: 8px; border-bottom: 1px solid #2b3342; margin-bottom: 14px; }
+  .side-project { border-left: 1px solid #8b8f97; padding-left: 17px; margin-bottom: 26px; }
+  .side-project h3 { font-size: 14px; font-weight: 700; line-height: 20px; }
+  .side-project .sub { font-weight: 200; color: #5a5f69; font-size: 12px; margin-bottom: 4px; }
+  .side-project ul { list-style: none; padding-left: 20px; }
+  .side-project li { position: relative; margin-bottom: 1px; }
+  .side-project li::before { content: "•"; position: absolute; left: -13px; color: #8b8f97; font-size: 9px; top: 2px; }
+  .p2 h4 { font-size: 17px; font-weight: 700; color: #5f636b; margin: 0 0 14px; }
+  .grid { background: #e6e6e6; padding: 26px 22px 28px; display: grid; grid-template-columns: repeat(3, 1fr); row-gap: 22px; margin-bottom: 38px; min-height: 120px; }
+  .app { display: flex; gap: 12px; align-items: flex-start; }
+  .app img { width: 48px; height: 48px; border-radius: 11px; display: block; }
+  .app b { display: block; font-size: 12.4px; font-weight: 700; color: #3d4048; line-height: 18px; }
+  .app a { display: block; font-size: 12.2px; line-height: 18px; }
+  .app span { display: block; font-weight: 200; color: #6a6e77; font-size: 11.6px; line-height: 18px; }
+  footer { position: absolute; bottom: 62px; left: 0; right: 0; text-align: center; font-weight: 200; color: #8b8f97; font-size: 11px; }
+</style>
+</head>
+<body>
+<section class="page">
+  <header>
+    <img src="assets/photo.jpg" alt="">
+    <h1>Carlos<span>Fonseca</span></h1>
+    <div class="role">iOS {{ROLE}} · Swift &amp; SwiftUI</div>
+    <ul>
+      <li>+351 919 891 099</li>
+      <li>carlosanielrf@gmail.com</li>
+      <li><a href="https://linkedin.com/in/carlosaniel">linkedin.com/in/carlosaniel</a></li>
+      <li><a href="https://github.com/Carlosanielrf">github.com/Carlosanielrf</a></li>
+      <li>Coimbra, Portugal</li>
+    </ul>
+  </header>
+  <div class="cols">
+    <div class="main">
+      <h2>Summary</h2>
+      <p>iOS {{role}}, 7 years shipping to the App Store. I’ve worked in the teams behind a B2B marketplace launched in 20 countries as three branded apps, a Portuguese C2C marketplace that climbed two stars on the App Store, and — for five years now, at Bosch — the apps that control home heating from your phone, where software has to talk to a physical appliance and get it right every time. Swift and SwiftUI daily, MVVM and VIPER where they earn their keep, REST contracts tested before release, not after. On my own time I design, build and ship two iOS apps solo, from the first commit to the store listing: Periplum, a travel app live on the App Store in 17 countries, and CoinPath, a personal finance app.</p>
+
+      <h2 class="exp">Experience</h2>
+      <div class="timeline">
+        <div class="job">
+          <div class="when">July 2021 – Present</div>
+          <div class="co">Bosch Thermotechnology | Aveiro</div>
+          <h3>iOS Developer</h3>
+          <ul>
+            <li>Develop and maintain the connected-heating apps for four Bosch brands — HomeCom Easy, MyBuderus, Vulcano Connect and IVT Anywhere — shipped from one shared iOS codebase.</li>
+            <li>Work on the app-to-appliance integration — the link customers feel as comfort at home, held to the same scrutiny as anything on screen.</li>
+            <li>Adapt a single interface to a whole catalogue of appliance types and generations, for an audience spread across ages, countries and languages.</li>
+            <li>Test REST endpoints against product requirements every release, catching contract drift before it reaches customers.</li>
+            <li>Tested a Core ML model for anomaly detection on device, reading faults in an appliance from its heating and cooling data.</li>
+          </ul>
+        </div>
+        <div class="job">
+          <div class="when">January 2019 – July 2021</div>
+          <div class="co">Appsconcept | IPN – Coimbra, Portugal</div>
+          <h3>iOS Developer</h3>
+          <ul>
+            <li>Built a B2B marketplace from scratch, launched in 20 countries as three branded apps — MachineryZone, Agriaffaires and Truckscorner — three business models over one shared codebase.</li>
+            <li>All three held above 3.3★ in France, the primary market.</li>
+            <li>Maintained CustoJusto, a Portuguese C2C marketplace — clearing the defects its reviews kept naming took the rating up two stars, to 4.5★.</li>
+          </ul>
+        </div>
+        <div class="job">
+          <div class="when">September 2018 – January 2019</div>
+          <div class="co">Appsconcept | IPN – Coimbra, Portugal</div>
+          <h3>Web Developer</h3>
+          <ul>
+            <li>Worked on a big-data dashboard in React and Angular that generated charts tailored to each client — where I learned how much analytics shapes a product.</li>
+            <li>Worked on an on-site preview tool for a construction firm: physical markers let clients see unbuilt foundations and structures through the camera.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <aside class="side">
+      <h2>Skills</h2>
+      <h3>Languages</h3><div class="light">Swift, Kotlin Multiplatform, JavaScript</div>
+      <h3>iOS</h3><div class="light">SwiftUI, UIKit, RxSwift, SwiftData, WidgetKit, App Intents, MapKit, PDFKit, StoreKit 2, Core ML, Swift Concurrency, iPhone &amp; iPad</div>
+      <h3>Architecture</h3><div class="light">MVVM, MVP, MVC, VIPER, SPM, CocoaPods, Carthage</div>
+      <h3>APIs &amp; testing</h3><div class="light">REST API design, Swagger, Swift Testing, Crashlytics</div>
+      <h3>Release &amp; tooling</h3><div class="light">GitHub Actions, Jenkins, Travis CI, TestFlight</div>
+      <h3>Product &amp; design</h3><div class="light">Firebase Analytics, Zeplin, Confluence</div>
+      <h3>Web</h3><div class="light">React, Angular</div>
+      <h2 class="s2">Education</h2>
+      <h3>Bachelor’s Degree in Multimedia</h3><div class="light">Instituto Superior Miguel Torga<br>2015 – 2018</div>
+      <h2 class="s2">Languages</h2>
+      <div class="light" style="margin-top:12px">Portuguese — native<br>English — professional working proficiency</div>
+    </aside>
+  </div>
+</section>
+
+<section class="page p2">
+  <h2>Side Projects</h2>
+  <div class="side-project">
+    <h3>Periplum</h3>
+    <div class="sub">Solo: design, architecture, code, release and store listing</div>
+    <ul>
+      <li>Travel app: capture places with notes, photos and location, organise them into trips and share them as a file or PDF itinerary; it can also turn an itinerary PDF into a trip. Live in 17 countries (PT, ES, FR, IT, DE, NL, BE, IE, LU, AT, CH, GR, US, UK, CA, AU, NZ).</li>
+      <li>SwiftUI and SwiftData on iOS 18, Swift 6 strict concurrency, domain logic isolated in a local Swift package that only depends on Foundation.</li>
+      <li>Widgets for Home Screen, Lock Screen and Control Center, plus App Intents for one-tap capture from Shortcuts and Siri.</li>
+      <li>Firebase Auth (Apple, Google) with a Firestore backup that only uploads what changed; Analytics and Crashlytics; StoreKit 2 in-app purchases with entitlement verification.</li>
+      <li>449 automated tests (Swift Testing) run on every push through CI.</li>
+      <li>Shipped in 6 locales via String Catalogs.</li>
+    </ul>
+  </div>
+  <div class="side-project">
+    <h3>CoinPath</h3>
+    <div class="sub">Solo: design, architecture, code, release and store listing</div>
+    <ul>
+      <li>Personal finance app that brings expenses, investments and net worth into one private place. Live on the App Store.</li>
+      <li>Bank statement import (CSV, XLSX) with custom rules and duplicate detection, holdings sync from Interactive Brokers and Coinbase, shared expense splitting and a budget rule like 50/30/20.</li>
+      <li>Local-first and works without an account: ledger on device in SwiftData, optional AES-256-GCM encrypted backup behind Sign in with Apple or Google, broker keys in the Keychain, Face ID or PIN lock.</li>
+      <li>Monthly insights generated on device by default, with optional AI through the user’s own API key.</li>
+      <li>SwiftUI and MVVM with protocol-backed services on iOS 18; StoreKit 2 subscriptions behind a Remote Config flag.</li>
+      <li>Shipped in 3 languages: English, Portuguese and Spanish.</li>
+    </ul>
+  </div>
+
+  <h4>Apps I maintain</h4>
+  <div class="grid">
+    <div class="app"><img src="assets/homecom.png" alt=""><div><b>HomeCom Easy</b><a href="https://apps.apple.com/app/id1438634070">App Store</a><span>Current</span></div></div>
+    <div class="app"><img src="assets/buderus.png" alt=""><div><b>MyBuderus</b><a href="https://apps.apple.com/app/id1509444082">App Store</a><span>Current</span></div></div>
+    <div class="app"><img src="assets/vulcano.png" alt=""><div><b>Vulcano Connect</b><a href="https://apps.apple.com/app/id1509445831">App Store</a><span>Current</span></div></div>
+    <div class="app"><img src="assets/ivt.png" alt=""><div><b>IVT Anywhere</b><a href="https://apps.apple.com/app/id529814511">App Store</a><span>Current</span></div></div>
+    <div class="app"><img src="assets/custojusto.png" alt=""><div><b>CustoJusto</b><a href="https://apps.apple.com/app/id474850957">App Store</a><span>2019 – 2021</span></div></div>
+  </div>
+  <h4>Apps I shipped from scratch</h4>
+  <div class="grid">
+    <div class="app"><img src="assets/machineryzone.png" alt=""><div><b>MachineryZone</b><a href="https://apps.apple.com/app/id1090014065">App Store</a><span>2019 – 2021</span></div></div>
+    <div class="app"><img src="assets/agriaffaires.png" alt=""><div><b>Agriaffaires</b><a href="https://apps.apple.com/app/id1090013490">App Store</a><span>2019 – 2021</span></div></div>
+    <div class="app"><img src="assets/truckscorner.png" alt=""><div><b>Truckscorner</b><a href="https://apps.apple.com/app/id1538154240">App Store</a><span>2019 – 2021</span></div></div>
+    <div class="app"><img src="assets/periplum.png" alt=""><div><b>Periplum</b><a href="https://apps.apple.com/app/id6801804074">App Store</a><span>2026 · solo</span></div></div>
+    <div class="app"><img src="assets/coinpath.png" alt=""><div><b>CoinPath</b><a href="https://apps.apple.com/app/id6792485196">App Store</a><span>2026 · solo</span></div></div>
+  </div>
+  <footer>Carlos Fonseca · iOS {{ROLE}} · carlosanielrf@gmail.com · +351 919 891 099</footer>
+</section>
+</body>
+</html>

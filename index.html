@@ -119,6 +119,14 @@
     .strip li { padding: 0 .6rem; border: 0 !important; }
     .strip li + li { border-left: 1px solid var(--hair) !important; }
   }
+  .strip + .strip { margin-top: .6rem; }
+  /* Three items: two columns on a phone with the last one centred across both */
+  @media (max-width: 559px) {
+    .strip.three li:nth-child(3) { grid-column: 1 / -1; }
+  }
+  @media (min-width: 560px) {
+    .strip.three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  }
   .strip small { display: block; font-size: 12px; color: var(--muted); }
   .strip b { display: block; margin: .15rem 0; font: 600 22px/1.15 var(--display); letter-spacing: -.01em; }
 
@@ -373,11 +381,15 @@
         <li><a href="cv.pdf" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8l-5-5Z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></svg>CV</a></li>
       </ul>
       <p class="pitch">I've spent <span class="yrs">7</span> years building iOS apps people use every day. Right now that means the Bosch apps that run home heating for four brands; before that, a marketplace that launched in 20 countries. In my own time I ship apps on my own, from the first commit to the App Store listing.</p>
-      <ul class="strip" aria-label="At a glance">
+      <ul class="strip three" aria-label="At a glance">
         <li><small>Experience</small><b><span class="yrs">7</span> years</b><small>iOS since 2019</small></li>
-        <li><small>Apps</small><b>10</b><small>shipped or maintained</small></li>
+        <li><small>Apps</small><b>10</b><small>shipped &amp; maintained</small></li>
         <li><small>Reach</small><b>20</b><small>countries</small></li>
-        <li><small>Rating</small><b>4.5★</b><small>CustoJusto, up 2★</small></li>
+      </ul>
+      <ul class="strip three" aria-label="App Store ratings">
+        <li><small>HomeCom Easy</small><b>4.3★</b><small>Portugal, 61 ratings</small></li>
+        <li><small>CustoJusto</small><b>4.5★</b><small>Portugal, 2,005 ratings</small></li>
+        <li><small>MachineryZone</small><b>4.1★</b><small>France, 11 ratings</small></li>
       </ul>
     </header>
 
@@ -521,7 +533,7 @@
     </div>
     <div class="chat-body" id="chat-body">
       <div class="log" id="log" role="log" aria-live="polite">
-        <div class="msg them first">Hi, I'm Carlos 👋</div>
+        <div class="msg them first">Hi 👋</div>
         <div class="msg them tail">Ask me anything about my work, or tap a question below.</div>
       </div>
       <div class="chips" id="chips">
