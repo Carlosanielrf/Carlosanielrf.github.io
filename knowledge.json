@@ -441,8 +441,16 @@
       "chip": "Outside work?",
       "keywords": ["hobby", "hobbies", "free time", "for fun", "weekend", "pet", "dog", "sport"],
       "questions": ["What do you do in your free time?", "Hobbies", "What are your hobbies?", "Tell me your hobbies", "Tell me about your hobbies", "What do you do for fun?", "What are your interests outside of work?", "What do you do on weekends?", "What do you like outside work?", "Tell me something personal", "Do you have pets?", "Do you have a dog?", "Do you do sports?"],
-      "answer": "Outside work I go to the gym and run, and I like eating out and going to the beach. Whenever I can, I go hiking on trails with my dog.",
-      "related": ["about", "contact"]
+      "answer": "Outside work I go to the gym and run, and I like eating out and going to the beach. Whenever I can, I go hiking on trails with my dog. At home I build metal mechanical puzzles: kits of tiny gears, springs and screws that I put together by hand, like a mechanical skull bust made entirely of gears.",
+      "related": ["puzzles", "about", "contact"]
+    },
+    {
+      "id": "puzzles",
+      "chip": "Mechanical puzzles?",
+      "keywords": ["puzzle", "puzzles", "mechanical", "gears", "model kit"],
+      "questions": ["Do you build mechanical puzzles?", "Tell me about your mechanical puzzles", "Do you do anything hands-on?", "Do you build model kits?", "What do you build at home?", "Do you like building things with your hands?", "Do you have any creative hobbies?"],
+      "answer": "Yes, at home I build metal mechanical puzzles: kits of tiny gears, springs and screws that I put together by hand. Two I'm proud of are a mechanical skull bust made entirely of gears, and a creature with leather wings on a stand with gears.\n\nIt's a lot like programming: many small pieces that only work once each one is in the right place.",
+      "related": ["hobbies", "about"]
     }
   ]
 }
