@@ -592,37 +592,21 @@
     scrollBeforeChat = window.scrollY;
     chat.classList.add('open'); scrim.classList.add('show');
     openBtn.setAttribute('aria-expanded', 'true');
-    // Pin the page while the sheet is up, so iOS has nothing to scroll when the keyboard opens
-    const bs = document.body.style;
-    bs.overflow = 'hidden'; bs.position = 'fixed'; bs.top = `-${scrollBeforeChat}px`; bs.left = '0'; bs.right = '0';
-    if (focus) input.focus({ preventScroll: true });
+    // No position:fixed on the body and no programmatic focus here: both leave iOS Safari with the
+    // page shifted down after the keyboard closes. The user taps the field themselves.
+    document.documentElement.style.overflow = 'hidden';
   }
   function closeChat() {
     if (!chat.classList.contains('open')) return;
     chat.classList.remove('open'); scrim.classList.remove('show');
     openBtn.setAttribute('aria-expanded', 'false');
     input.blur();
-    chatReturnFocus?.focus?.({ preventScroll: true });
-    // Keep the page pinned until the iOS keyboard is fully gone. Releasing it while the keyboard
-    // is still sliding down leaves the page pushed down (a dark strip at the top).
+    document.documentElement.style.overflow = '';
     const y = scrollBeforeChat;
-    const vv = window.visualViewport;
-    let released = false;
-    const release = () => {
-      if (released) return;
-      released = true;
-      vv?.removeEventListener('resize', check);
-      const bs = document.body.style;
-      bs.overflow = ''; bs.position = ''; bs.top = ''; bs.left = ''; bs.right = '';
-      const restore = () => window.scrollTo({ top: y, left: 0, behavior: 'instant' });
-      restore();
-      requestAnimationFrame(restore);
-      setTimeout(restore, 150);
-    };
-    const check = () => { if (!vv || vv.height >= window.innerHeight - 1) setTimeout(release, 50); };
-    vv?.addEventListener('resize', check);
-    setTimeout(release, 900); // fallback, e.g. no keyboard was open
-    if (!vv || vv.height >= window.innerHeight - 1) release();
+    const restore = () => window.scrollTo({ top: y, left: 0, behavior: 'instant' });
+    restore();
+    requestAnimationFrame(restore);
+    [150, 400, 800].forEach(t => setTimeout(restore, t));
   }
   openBtn.addEventListener('click', () => openChat());
   $('chat-close').addEventListener('click', closeChat);
