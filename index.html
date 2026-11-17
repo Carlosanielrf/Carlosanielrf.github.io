@@ -240,10 +240,12 @@
     }
     .chat.open { transform: none; visibility: visible; transition: transform .32s cubic-bezier(.2, .8, .2, 1); }
     .scrim {
-      position: fixed; inset: 0; z-index: 25; background: rgba(0, 0, 0, .35);
-      opacity: 0; pointer-events: none; transition: opacity .3s;
+      /* Starts a few px below the top edge and is hidden when closed: iOS Safari tints its status
+         bar from fixed elements touching the top, and kept the dimmed tint after the sheet closed */
+      position: fixed; inset: 8px 0 0 0; z-index: 25; background: rgba(0, 0, 0, .35);
+      opacity: 0; visibility: hidden; pointer-events: none; transition: opacity .3s, visibility 0s linear .3s;
     }
-    .scrim.show { opacity: 1; pointer-events: auto; }
+    .scrim.show { opacity: 1; visibility: visible; pointer-events: auto; transition: opacity .3s; }
   }
   .grabber { width: 36px; height: 5px; border-radius: 3px; background: var(--hair); margin: .45rem auto 0; flex: none; }
   .chat-head {
