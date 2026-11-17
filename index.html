@@ -584,11 +584,12 @@
   const docked = matchMedia('(min-width: 1080px)');
 
   // ---------- Sheet on small screens, docked panel on large ones ----------
-  let chatReturnFocus = null;
+  let chatReturnFocus = null, scrollBeforeChat = 0;
   function openChat({ focus = true } = {}) {
     if (docked.matches) { if (focus) input.focus({ preventScroll: true }); return; }
     if (chat.classList.contains('open')) return;
     chatReturnFocus = document.activeElement;
+    scrollBeforeChat = window.scrollY;
     chat.classList.add('open'); scrim.classList.add('show');
     openBtn.setAttribute('aria-expanded', 'true');
     document.body.style.overflow = 'hidden';
@@ -601,6 +602,12 @@
     document.body.style.overflow = '';
     input.blur();
     chatReturnFocus?.focus?.({ preventScroll: true });
+    // iOS can leave the page shifted after the keyboard closes (a black strip at the top).
+    // Put the scroll back once the keyboard is gone.
+    const restore = () => window.scrollTo(0, scrollBeforeChat);
+    restore();
+    requestAnimationFrame(restore);
+    setTimeout(restore, 350);
   }
   openBtn.addEventListener('click', () => openChat());
   $('chat-close').addEventListener('click', closeChat);
