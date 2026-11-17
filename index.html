@@ -592,25 +592,29 @@
     scrollBeforeChat = window.scrollY;
     chat.classList.add('open'); scrim.classList.add('show');
     openBtn.setAttribute('aria-expanded', 'true');
-    document.body.style.overflow = 'hidden';
+    // Pin the page while the sheet is up, so iOS has nothing to scroll when the keyboard opens
+    const bs = document.body.style;
+    bs.overflow = 'hidden'; bs.position = 'fixed'; bs.top = `-${scrollBeforeChat}px`; bs.left = '0'; bs.right = '0';
     if (focus) input.focus({ preventScroll: true });
   }
   function closeChat() {
     if (!chat.classList.contains('open')) return;
     chat.classList.remove('open'); scrim.classList.remove('show');
     openBtn.setAttribute('aria-expanded', 'false');
-    document.body.style.overflow = '';
+    const bs = document.body.style;
+    bs.overflow = ''; bs.position = ''; bs.top = ''; bs.left = ''; bs.right = '';
     input.blur();
     chatReturnFocus?.focus?.({ preventScroll: true });
-    // iOS can leave the page pushed down after the keyboard closes (a dark strip at the top).
-    // Nudge the scroll position back while the keyboard animates away and for a moment after.
+    // The page uses smooth scrolling, so jump instantly. Repeat while the iOS keyboard animates
+    // away, because it can leave the page pushed down (a dark strip at the top).
     const y = scrollBeforeChat;
-    const restore = () => { window.scrollTo(0, y + 1); window.scrollTo(0, y); };
+    const restore = () => window.scrollTo({ top: y, left: 0, behavior: 'instant' });
+    restore();
     const vv = window.visualViewport;
     const until = performance.now() + 1000;
     const onVV = () => { restore(); if (performance.now() > until) vv.removeEventListener('resize', onVV); };
     vv?.addEventListener('resize', onVV);
-    [0, 120, 350, 700, 1100].forEach(ms => setTimeout(restore, ms));
+    [60, 200, 400, 800, 1200].forEach(ms => setTimeout(restore, ms));
   }
   openBtn.addEventListener('click', () => openChat());
   $('chat-close').addEventListener('click', closeChat);
