@@ -608,6 +608,18 @@
     requestAnimationFrame(restore);
     [150, 400, 800].forEach(t => setTimeout(restore, t));
   }
+  // Temporary diagnostics: open the page with ?debug to see viewport numbers on screen
+  if (location.search.includes('debug')) {
+    const d = document.createElement('pre');
+    d.style.cssText = 'position:fixed;z-index:99;left:4px;bottom:70px;margin:0;padding:4px 6px;font:11px/1.3 monospace;color:#0f0;background:rgba(0,0,0,.8);pointer-events:none';
+    document.body.append(d);
+    const vv = window.visualViewport;
+    const tick = () => {
+      d.textContent = `scrollY ${Math.round(scrollY)}  innerH ${innerHeight}\nvv.top ${vv?.offsetTop.toFixed(1)} vv.h ${vv?.height.toFixed(1)} scale ${vv?.scale}\nbody.top ${document.body.getBoundingClientRect().top.toFixed(1)} html.ovf "${document.documentElement.style.overflow}"`;
+      requestAnimationFrame(tick);
+    };
+    tick();
+  }
   openBtn.addEventListener('click', () => openChat());
   $('chat-close').addEventListener('click', closeChat);
   scrim.addEventListener('click', closeChat);
