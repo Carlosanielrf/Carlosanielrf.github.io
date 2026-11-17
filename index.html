@@ -597,6 +597,7 @@
     // No position:fixed on the body and no programmatic focus here: both leave iOS Safari with the
     // page shifted down after the keyboard closes. The user taps the field themselves.
     document.documentElement.style.overflow = 'hidden';
+    fitSheet();
   }
   function closeChat() {
     if (!chat.classList.contains('open')) return;
@@ -604,6 +605,7 @@
     openBtn.setAttribute('aria-expanded', 'false');
     input.blur();
     document.documentElement.style.overflow = '';
+    chat.style.bottom = ''; chat.style.top = '';
     const y = scrollBeforeChat;
     const restore = () => window.scrollTo({ top: y, left: 0, behavior: 'instant' });
     restore();
@@ -622,6 +624,17 @@
     };
     tick();
   }
+  // Keep the sheet inside the visible area while the iOS keyboard is up (it otherwise stays
+  // anchored to the layout viewport, which iOS scrolls and extends behind the keyboard)
+  const vvp = window.visualViewport;
+  function fitSheet() {
+    if (docked.matches || !vvp || !chat.classList.contains('open')) { chat.style.bottom = ''; chat.style.top = ''; return; }
+    const keyboard = Math.max(0, window.innerHeight - vvp.offsetTop - vvp.height);
+    chat.style.bottom = keyboard + 'px';
+    chat.style.top = `calc(${Math.round(vvp.offsetTop)}px + env(safe-area-inset-top, 0px) + .6rem)`;
+  }
+  vvp?.addEventListener('resize', fitSheet);
+  vvp?.addEventListener('scroll', fitSheet);
   openBtn.addEventListener('click', () => openChat());
   $('chat-close').addEventListener('click', closeChat);
   scrim.addEventListener('click', closeChat);
