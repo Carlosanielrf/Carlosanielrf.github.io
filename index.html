@@ -238,7 +238,7 @@
       transform: translateY(105%); visibility: hidden;
       transition: transform .32s cubic-bezier(.2, .8, .2, 1), visibility 0s linear .32s;
     }
-    .chat.open { transform: none; visibility: visible; transition: transform .32s cubic-bezier(.2, .8, .2, 1), bottom .28s cubic-bezier(.2, .8, .2, 1); }
+    .chat.open { transform: none; visibility: visible; transition: transform .32s cubic-bezier(.2, .8, .2, 1), bottom .28s cubic-bezier(.2, .8, .2, 1), top .28s cubic-bezier(.2, .8, .2, 1); }
     .scrim {
       /* Starts a few px below the top edge and is hidden when closed: iOS Safari tints its status
          bar from fixed elements touching the top, and kept the dimmed tint after the sheet closed */
@@ -633,8 +633,12 @@
     chat.style.bottom = keyboard + 'px';
     chat.style.top = `calc(${Math.round(vvp.offsetTop)}px + env(safe-area-inset-top, 0px) + .6rem)`;
   }
-  vvp?.addEventListener('resize', fitSheet);
-  vvp?.addEventListener('scroll', fitSheet);
+  // iOS reports intermediate (and briefly wrong) offsets while the keyboard slides in, which made
+  // the sheet jump down and back. Wait until the numbers settle, then let CSS animate to them.
+  let fitTimer = 0;
+  const fitSoon = () => { clearTimeout(fitTimer); fitTimer = setTimeout(fitSheet, 90); };
+  vvp?.addEventListener('resize', fitSoon);
+  vvp?.addEventListener('scroll', fitSoon);
   openBtn.addEventListener('click', () => openChat());
   $('chat-close').addEventListener('click', closeChat);
   scrim.addEventListener('click', closeChat);
