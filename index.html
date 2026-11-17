@@ -304,7 +304,7 @@
   }
   .chips button:hover { background: var(--blue-tint); }
 
-  .composer { flex: none; padding: .55rem .75rem calc(max(var(--kb, 0px), env(safe-area-inset-bottom, 0px)) + .45rem); transition: padding-bottom .28s cubic-bezier(.2, .8, .2, 1); border-top: 1px solid var(--hair); }
+  .composer { flex: none; padding: .55rem .75rem calc(max(var(--kb, 0px), env(safe-area-inset-bottom, 0px)) + .45rem); transition: padding-bottom .25s cubic-bezier(.2, .8, .2, 1); border-top: 1px solid var(--hair); }
   .composer form { position: relative; }
   .composer input {
     width: 100%; font: inherit; font-size: 16px; color: var(--ink);
@@ -635,6 +635,13 @@
   let kbHeight = 0;
   const syncKb = () => document.documentElement.classList.toggle('kb',
     chat.classList.contains('open') && !docked.matches && (kbHeight > 80 || document.activeElement === input));
+  // Focus the field ourselves so iOS doesn't scroll the document to reveal it: the sheet then stays
+  // put and only the composer rises with the keyboard
+  input.addEventListener('touchstart', e => {
+    if (docked.matches || document.activeElement === input) return;
+    e.preventDefault();
+    input.focus({ preventScroll: true });
+  }, { passive: false });
   input.addEventListener('focus', syncKb);
   input.addEventListener('blur', () => setTimeout(syncKb, 0));
   function fitSheet() {
@@ -647,7 +654,7 @@
   // iOS reports intermediate (and briefly wrong) offsets while the keyboard slides in, which made
   // the sheet jump down and back. Wait until the numbers settle, then let CSS animate to them.
   let fitTimer = 0;
-  const fitSoon = () => { clearTimeout(fitTimer); fitTimer = setTimeout(fitSheet, 90); };
+  const fitSoon = () => { cancelAnimationFrame(fitTimer); fitTimer = requestAnimationFrame(fitSheet); };
   vvp?.addEventListener('resize', fitSoon);
   vvp?.addEventListener('scroll', fitSoon);
   openBtn.addEventListener('click', () => openChat());
