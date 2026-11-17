@@ -169,7 +169,7 @@
       "chip": "Tell me about Periplum",
       "keywords": ["periplum", "side project", "side projects"],
       "questions": ["What is Periplum?", "Do you have side projects?", "Tell me about your own app", "Have you built an app alone?", "Personal projects", "What does Periplum do?", "Tell me about your travel app"],
-      "answer": "Periplum is my travel app. You capture the places you visit (a restaurant, a viewpoint, a trail) with notes, photos and location, organise them into trips, and share a trip with friends as a file or a PDF itinerary. It can also read an itinerary someone already wrote as a PDF and turn it into a trip, asking about anything it can't work out on its own.\n\nI built it alone, from the design to the store listing. It's live in Portugal, Spain, France, Italy, the US and the UK, in five languages plus British English. My second app, CoinPath, a personal finance app, just launched too.",
+      "answer": "Periplum is my travel app. You capture the places you visit (a restaurant, a viewpoint, a trail) with notes, photos and location, organise them into trips, and share a trip with friends as a file or a PDF itinerary. It can also read an itinerary someone already wrote as a PDF and turn it into a trip, asking about anything it can't work out on its own.\n\nI built it alone, from the design to the store listing. It's live in 17 countries, including Portugal, Spain, France, Italy, Germany, the US and the UK, in five languages plus British English. My second app, CoinPath, a personal finance app, just launched too.",
       "links": [
         { "label": "Periplum", "url": "https://apps.apple.com/app/id6801804074" },
         { "label": "CoinPath", "url": "https://apps.apple.com/app/id6792485196" }
