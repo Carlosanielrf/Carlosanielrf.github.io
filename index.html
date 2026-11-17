@@ -608,7 +608,7 @@
     input.blur();
     document.documentElement.style.overflow = '';
     chat.style.removeProperty('--kb'); chat.style.top = '';
-    document.documentElement.classList.remove('kb');
+    kbHeight = 0; syncKb();
     const y = scrollBeforeChat;
     const restore = () => window.scrollTo({ top: y, left: 0, behavior: 'instant' });
     restore();
@@ -630,11 +630,18 @@
   // Keep the sheet inside the visible area while the iOS keyboard is up (it otherwise stays
   // anchored to the layout viewport, which iOS scrolls and extends behind the keyboard)
   const vvp = window.visualViewport;
+  // Hide the page behind the sheet whenever the keyboard is (or is about to be) up. Some iOS versions
+  // shrink the layout viewport instead of the visual one, so don't rely on the keyboard height alone.
+  let kbHeight = 0;
+  const syncKb = () => document.documentElement.classList.toggle('kb',
+    chat.classList.contains('open') && !docked.matches && (kbHeight > 80 || document.activeElement === input));
+  input.addEventListener('focus', syncKb);
+  input.addEventListener('blur', () => setTimeout(syncKb, 0));
   function fitSheet() {
-    if (docked.matches || !vvp || !chat.classList.contains('open')) { chat.style.removeProperty('--kb'); chat.style.top = ''; document.documentElement.classList.remove('kb'); return; }
+    if (docked.matches || !vvp || !chat.classList.contains('open')) { chat.style.removeProperty('--kb'); chat.style.top = ''; kbHeight = 0; syncKb(); return; }
     const keyboard = Math.max(0, window.innerHeight - vvp.offsetTop - vvp.height);
     chat.style.setProperty('--kb', keyboard + 'px');
-    document.documentElement.classList.toggle('kb', keyboard > 80);
+    kbHeight = keyboard; syncKb();
     chat.style.top = `calc(${Math.round(vvp.offsetTop)}px + env(safe-area-inset-top, 0px) + .6rem)`;
   }
   // iOS reports intermediate (and briefly wrong) offsets while the keyboard slides in, which made
