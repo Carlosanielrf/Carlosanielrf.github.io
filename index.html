@@ -247,6 +247,8 @@
     }
     .scrim.show { opacity: 1; visibility: visible; pointer-events: auto; transition: opacity .3s; }
   }
+  /* While the keyboard is up the page behind the sheet is hidden, so the translucent keyboard shows only the chat colour */
+  .kb .cv, .kb .launcher { visibility: hidden; }
   .grabber { width: 36px; height: 5px; border-radius: 3px; background: var(--hair); margin: .45rem auto 0; flex: none; }
   .chat-head {
     flex: none; display: flex; align-items: center; gap: .65rem;
@@ -606,6 +608,7 @@
     input.blur();
     document.documentElement.style.overflow = '';
     chat.style.removeProperty('--kb'); chat.style.top = '';
+    document.documentElement.classList.remove('kb');
     const y = scrollBeforeChat;
     const restore = () => window.scrollTo({ top: y, left: 0, behavior: 'instant' });
     restore();
@@ -628,9 +631,10 @@
   // anchored to the layout viewport, which iOS scrolls and extends behind the keyboard)
   const vvp = window.visualViewport;
   function fitSheet() {
-    if (docked.matches || !vvp || !chat.classList.contains('open')) { chat.style.removeProperty('--kb'); chat.style.top = ''; return; }
+    if (docked.matches || !vvp || !chat.classList.contains('open')) { chat.style.removeProperty('--kb'); chat.style.top = ''; document.documentElement.classList.remove('kb'); return; }
     const keyboard = Math.max(0, window.innerHeight - vvp.offsetTop - vvp.height);
     chat.style.setProperty('--kb', keyboard + 'px');
+    document.documentElement.classList.toggle('kb', keyboard > 80);
     chat.style.top = `calc(${Math.round(vvp.offsetTop)}px + env(safe-area-inset-top, 0px) + .6rem)`;
   }
   // iOS reports intermediate (and briefly wrong) offsets while the keyboard slides in, which made
